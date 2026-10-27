@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tahap 1 · Fondasi — Statistik & Logika Data Dasar | DataPath.ID</title>
+<meta name="description" content="Materi lengkap Tahap 1 Belajar Data Analyst: statistik deskriptif, probabilitas, distribusi normal, tipe data, dan critical thinking. Dengan contoh, rumus, dan latihan." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=KaTeX_Main:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#0b1220;--bg-soft:#111a2e;--surface:#15203a;--surface-2:#1b2945;
+    --line:#253251;--text:#eaf0ff;--text-soft:#a8b5cf;--text-dim:#6f7e9c;
+    --primary:#5b8cff;--primary-2:#7a5cff;--accent:#22d3ee;--accent-2:#34d399;
+    --warning:#fbbf24;--pink:#f472b6;--orange:#fb923c;
+    --grad-1:linear-gradient(135deg,#5b8cff 0%,#7a5cff 100%);
+    --grad-2:linear-gradient(135deg,#22d3ee 0%,#34d399 100%);
+    --grad-3:linear-gradient(135deg,#fbbf24 0%,#f472b6 100%);
+    --shadow-md:0 10px 30px rgba(0,0,0,.35);
+    --radius:16px;--radius-sm:10px;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.7;
+    overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(700px 500px at 5% -5%,rgba(91,140,255,.15),transparent 60%),
+      radial-gradient(600px 500px at 95% 5%,rgba(122,92,255,.12),transparent 60%),
+      radial-gradient(800px 600px at 50% 100%,rgba(34,211,238,.08),transparent 60%);
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:rgba(91,140,255,.4);color:#fff}
+  .container{width:100%;max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* ====== TYPO ====== */
+  h1,h2,h3,h4{line-height:1.25;letter-spacing:-.02em;font-weight:800}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--accent);padding:6px 14px;border:1px solid rgba(34,211,238,.3);
+    border-radius:999px;background:rgba(34,211,238,.06);
+  }
+  .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+  .section-title{
+    font-size:clamp(26px,3.5vw,36px);margin:14px 0 12px;
+    background:linear-gradient(180deg,#fff,#b8c5e6);-webkit-background-clip:text;
+    background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .section-sub{color:var(--text-soft);max-width:720px;font-size:16px}
+
+  /* ====== NAV ====== */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    background:rgba(11,18,32,.78);border-bottom:1px solid rgba(255,255,255,.05);
+    transition:all .3s}
+  nav.scrolled{background:rgba(11,18,32,.94);border-bottom-color:rgba(255,255,255,.08)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;
+    padding:14px 24px;max-width:1180px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:16px}
+  .brand-logo{width:36px;height:36px;border-radius:10px;background:var(--grad-1);
+    display:grid;place-items:center;box-shadow:0 6px 20px rgba(91,140,255,.4);position:relative}
+  .brand-logo svg{width:20px;height:20px}
+  .brand-logo::after{content:"";position:absolute;inset:0;border-radius:10px;
+    background:linear-gradient(135deg,rgba(255,255,255,.25),transparent 50%)}
+  .brand small{display:block;font-size:11px;font-weight:500;color:var(--text-dim);letter-spacing:.04em}
+  .nav-links{display:flex;gap:6px;align-items:center}
+  .nav-links a{padding:8px 14px;border-radius:8px;font-size:14px;font-weight:500;
+    color:var(--text-soft);transition:all .2s}
+  .nav-links a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+  .nav-back{padding:9px 16px !important;border-radius:10px;background:rgba(255,255,255,.04);
+    border:1px solid var(--line);color:var(--text) !important;font-weight:600;display:inline-flex;gap:6px;align-items:center}
+  .nav-back:hover{background:rgba(255,255,255,.08) !important}
+  .nav-back svg{width:16px;height:16px}
+
+  /* ====== HERO ====== */
+  .hero{padding:128px 0 56px}
+  .hero-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+  .stage-badge{
+    display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border-radius:999px;
+    background:var(--grad-1);color:#fff;font-weight:700;font-size:13px;letter-spacing:.04em;
+    box-shadow:0 6px 20px rgba(91,140,255,.35)
+  }
+  .stage-badge .dot{width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 8px #fff}
+  .meta-pill{font-size:13px;color:var(--text-soft);padding:6px 14px;border-radius:999px;
+    background:rgba(255,255,255,.04);border:1px solid var(--line);font-weight:500}
+  .hero h1{font-size:clamp(32px,5vw,52px);line-height:1.08;margin:0 0 18px}
+  .hero h1 .grad{background:linear-gradient(120deg,#5b8cff 0%,#22d3ee 50%,#34d399 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .hero p.lead{font-size:18px;color:var(--text-soft);max-width:680px}
+  .hero-info{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px
+  }
+  @media(max-width:720px){.hero-info{grid-template-columns:repeat(2,1fr)}}
+  .info-box{padding:18px;border-radius:var(--radius);background:var(--surface);
+    border:1px solid var(--line);text-align:center}
+  .info-num{font-size:22px;font-weight:800;background:var(--grad-2);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .info-lbl{font-size:12px;color:var(--text-dim);margin-top:2px}
+
+  /* ====== CONTENT ====== */
+  .content-wrap{padding:40px 0 60px}
+  .layout{display:grid;grid-template-columns:260px 1fr;gap:36px;align-items:flex-start}
+  @media(max-width:920px){.layout{grid-template-columns:1fr;gap:0}}
+
+  .toc{position:sticky;top:88px;background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--radius);padding:20px;max-height:calc(100vh - 110px);overflow-y:auto}
+  @media(max-width:920px){.toc{position:relative;top:0;display:none}}
+  .toc h4{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);margin-bottom:14px;font-weight:700}
+  .toc-list{list-style:none;display:flex;flex-direction:column;gap:4px}
+  .toc-list a{display:flex;gap:10px;padding:8px 10px;border-radius:8px;font-size:14px;
+    color:var(--text-soft);transition:all .2s;align-items:center}
+  .toc-list a:hover{background:rgba(255,255,255,.05);color:var(--text)}
+  .toc-list a.active{background:rgba(91,140,255,.12);color:var(--primary)}
+  .toc-list a .num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-dim);min-width:24px}
+  .toc-list a.active .num{color:var(--primary)}
+
+  .article{min-width:0}
+  section.mod{padding:48px 0;border-bottom:1px solid rgba(37,50,81,.4);scroll-margin-top:88px}
+  section.mod:last-child{border-bottom:0}
+  .mod-head{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+  .mod-num{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent);
+    padding:4px 10px;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.3);
+    border-radius:6px;font-weight:600}
+  .mod-time{font-size:13px;color:var(--text-dim)}
+  section.mod h2{font-size:28px;margin:8px 0 18px}
+  section.mod h3{font-size:20px;margin:28px 0 12px;color:var(--text)}
+  section.mod h4{font-size:16px;margin:18px 0 8px;color:var(--accent-2);font-weight:700}
+  section.mod p{color:var(--text-soft);margin-bottom:14px;font-size:15.5px}
+  section.mod strong{color:var(--text);font-weight:700}
+  section.mod em{color:var(--accent);font-style:normal;font-weight:600}
+  section.mod ul,section.mod ol{padding-left:22px;margin-bottom:14px;color:var(--text-soft)}
+  section.mod li{margin-bottom:6px;font-size:15.5px}
+  section.mod code{font-family:'JetBrains Mono',monospace;background:rgba(91,140,255,.1);
+    color:var(--primary);padding:2px 6px;border-radius:4px;font-size:13.5px}
+
+  /* Callouts */
+  .callout{padding:18px 20px 18px 56px;border-radius:12px;margin:18px 0;position:relative;font-size:15px}
+  .callout::before{content:"";position:absolute;left:18px;top:18px;width:22px;height:22px;
+    background-size:contain;background-repeat:no-repeat}
+  .callout strong{color:var(--text)}
+  .note{background:rgba(91,140,255,.08);border:1px solid rgba(91,140,255,.25);border-left:3px solid var(--primary)}
+  .note::before{content:"💡";position:absolute;left:18px;top:16px;font-size:18px}
+  .warn{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25);border-left:3px solid var(--warning)}
+  .warn::before{content:"⚠";position:absolute;left:18px;top:16px;font-size:18px}
+  .tip{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.25);border-left:3px solid var(--accent-2)}
+  .tip::before{content:"✓";position:absolute;left:18px;top:16px;font-size:18px;color:var(--accent-2);font-weight:700}
+  .ex{background:rgba(244,114,182,.08);border:1px solid rgba(244,114,182,.25);border-left:3px solid var(--pink)}
+  .ex::before{content:"✎";position:absolute;left:18px;top:16px;font-size:18px;color:var(--pink);font-weight:700}
+
+  /* Formula box */
+  .formula{
+    background:linear-gradient(135deg,rgba(91,140,255,.08),rgba(122,92,255,.06));
+    border:1px solid rgba(91,140,255,.25);border-radius:12px;padding:22px;
+    margin:18px 0;text-align:center;font-family:'KaTeX_Main','Cambria Math','Latin Modern Math',serif;
+    font-size:20px;color:var(--text);position:relative;overflow:hidden
+  }
+  .formula::before{content:"RUMUS";position:absolute;top:8px;left:14px;font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:10px;font-weight:700;letter-spacing:.15em;color:var(--primary)}
+  .formula .where{display:block;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;
+    color:var(--text-dim);margin-top:12px;text-align:left}
+  .formula .sub{font-size:.7em;vertical-align:sub}
+  .formula .sup{font-size:.7em;vertical-align:super}
+
+  /* Tables */
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px}
+  th{background:var(--surface-2);color:var(--text);padding:12px 14px;text-align:left;
+    font-weight:700;border-bottom:2px solid var(--primary);font-size:13px;letter-spacing:.02em}
+  td{padding:12px 14px;border-bottom:1px solid var(--line);color:var(--text-soft)}
+  tr:hover td{background:rgba(91,140,255,.04)}
+  td strong{color:var(--text)}
+  td code{font-size:12.5px}
+
+  /* Example box */
+  .example{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:24px;margin:20px 0;position:relative;overflow:hidden}
+  .example::before{content:"CONTOH";position:absolute;top:14px;right:18px;font-size:11px;
+    font-weight:700;letter-spacing:.12em;color:var(--pink);padding:4px 10px;
+    background:rgba(244,114,182,.12);border-radius:6px}
+  .example h4{margin-top:0;color:var(--text)}
+  .example p{margin-bottom:10px}
+  .example .calc{font-family:'JetBrains Mono',monospace;background:rgba(0,0,0,.25);
+    padding:12px 14px;border-radius:8px;color:var(--accent-2);font-size:14px;margin:10px 0;overflow-x:auto}
+
+  /* SVG chart styles */
+  .chart-wrap{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:22px;margin:20px 0}
+  .chart-wrap .chart-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px}
+  .chart-wrap .chart-cap{font-size:13px;color:var(--text-dim);margin-top:10px}
+  svg.chart{width:100%;height:auto;display:block}
+
+  /* Quiz */
+  .quiz{background:linear-gradient(180deg,var(--surface) 0%,var(--bg-soft) 100%);
+    border:1px solid var(--line);border-radius:16px;padding:28px;margin:24px 0}
+  .quiz h3{margin-top:0;color:var(--text);font-size:22px;display:flex;align-items:center;gap:10px}
+  .quiz h3 .badge{font-size:11px;padding:4px 10px;border-radius:6px;
+    background:var(--grad-3);color:#1a0e2e;font-weight:800;letter-spacing:.08em}
+  .q{margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+  .q:last-child{border-bottom:0;padding-bottom:0;margin-bottom:0}
+  .q-num{display:inline-block;font-family:'JetBrains Mono',monospace;font-weight:700;
+    color:var(--accent);font-size:13px;margin-bottom:6px}
+  .q-text{font-size:15px;color:var(--text);margin-bottom:10px}
+  .opts{list-style:none;padding:0}
+  .opts li{padding:10px 14px;border:1px solid var(--line);border-radius:8px;
+    margin-bottom:6px;font-size:14px;color:var(--text-soft);cursor:pointer;
+    transition:all .2s;display:flex;align-items:center;gap:10px}
+  .opts li:hover{border-color:var(--primary);background:rgba(91,140,255,.06)}
+  .opts li.correct{border-color:var(--accent-2);background:rgba(52,211,153,.1);color:var(--accent-2)}
+  .opts li.wrong{border-color:var(--pink);background:rgba(244,114,182,.08);color:var(--pink)}
+  .opt-letter{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--text-dim);
+    width:22px;text-align:center}
+  .opts li.correct .opt-letter,.opts li.wrong .opt-letter{color:inherit}
+  .reveal-btn{margin-top:16px;padding:10px 20px;border-radius:8px;background:var(--grad-1);
+    color:#fff;font-weight:600;border:0;cursor:pointer;font-size:14px;font-family:inherit;
+    box-shadow:0 6px 16px rgba(91,140,255,.3)}
+  .reveal-btn:hover{transform:translateY(-1px)}
+  .explanation{display:none;margin-top:8px;padding:12px 14px;border-radius:8px;
+    background:rgba(91,140,255,.06);border-left:3px solid var(--primary);
+    font-size:14px;color:var(--text-soft)}
+  .explanation.show{display:block}
+
+  /* Schedule */
+  .schedule{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:24px 0}
+  @media(max-width:860px){.schedule{grid-template-columns:1fr}}
+  .week{background:linear-gradient(180deg,var(--surface) 0%,var(--bg-soft) 100%);
+    border:1px solid var(--line);border-radius:14px;padding:22px}
+  .week-h{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:14px;
+    border-bottom:1px solid var(--line)}
+  .week-num{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;
+    font-weight:800;font-size:15px;color:#fff;flex-shrink:0}
+  .week:nth-child(1) .week-num{background:var(--grad-1)}
+  .week:nth-child(2) .week-num{background:var(--grad-2)}
+  .week:nth-child(3) .week-num{background:var(--grad-3)}
+  .week h4{margin:0;font-size:16px}
+  .week .sub{font-size:12px;color:var(--text-dim);margin-top:2px}
+  .week ul{list-style:none;padding:0;margin:0}
+  .week ul li{font-size:13.5px;color:var(--text-soft);padding:7px 0;display:flex;gap:8px;
+    align-items:flex-start;border-bottom:1px dashed rgba(37,50,81,.5)}
+  .week ul li:last-child{border-bottom:0}
+  .week ul li::before{content:"→";color:var(--primary);flex-shrink:0;font-weight:700}
+  .week ul li strong{color:var(--text);font-weight:600}
+
+  /* Resources */
+  .res-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:24px 0}
+  @media(max-width:720px){.res-list{grid-template-columns:1fr}}
+  .res-item{display:flex;gap:14px;padding:18px;border-radius:12px;background:var(--surface);
+    border:1px solid var(--line);transition:all .25s}
+  .res-item:hover{border-color:var(--primary);transform:translateY(-2px)}
+  .res-ic{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;
+    background:rgba(91,140,255,.12);color:var(--primary);flex-shrink:0}
+  .res-ic svg{width:20px;height:20px}
+  .res-item:nth-child(2) .res-ic{background:rgba(244,114,182,.12);color:var(--pink)}
+  .res-item:nth-child(3) .res-ic{background:rgba(52,211,153,.12);color:var(--accent-2)}
+  .res-item:nth-child(4) .res-ic{background:rgba(251,191,36,.12);color:var(--warning)}
+  .res-item h4{font-size:15px;margin-bottom:4px}
+  .res-item p{font-size:13px;color:var(--text-dim);margin:0}
+  .res-item .url{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);margin-top:6px;display:block}
+
+  /* Section nav */
+  .section-nav{display:flex;justify-content:space-between;gap:16px;margin-top:60px;
+    padding-top:30px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .snav{flex:1;min-width:240px;padding:18px;border-radius:12px;background:var(--surface);
+    border:1px solid var(--line);transition:all .25s}
+  .snav:hover{border-color:var(--primary);transform:translateY(-2px)}
+  .snav-lbl{font-size:12px;color:var(--text-dim);margin-bottom:6px}
+  .snav-title{font-size:15px;font-weight:700;color:var(--text)}
+  .snav.next{text-align:right}
+
+  /* Footer */
+  footer{border-top:1px solid var(--line);padding:36px 0 28px;background:var(--bg-soft)}
+  .footer-inner{display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:16px}
+  .footer-inner p{font-size:13px;color:var(--text-dim)}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s cubic-bezier(.16,1,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* Print-friendly tweaks */
+  @media print{
+    nav,.toc,.section-nav,.reveal-btn{display:none}
+    body{background:#fff;color:#000}
+    .formula,table,.example,.chart-wrap,.callout{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="brand">
+      <div class="brand-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-6"/>
+        </svg>
+      </div>
+      <div>DataPath<span style="opacity:.5">.</span>ID<small>Materi Tahap 1 · Fondasi</small></div>
+    </a>
+    <div class="nav-links">
+      <a href="#m1">Tipe Data</a>
+      <a href="#m2">Statistik Deskriptif</a>
+      <a href="#m3">Probabilitas</a>
+      <a href="#m4">Distribusi</a>
+      <a href="#m5">Critical Thinking</a>
+      <a href="#schedule">Jadwal</a>
+      <a href="#quiz">Latihan</a>
+      <a href="roadmap-data-analyst.html" class="nav-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Roadmap
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-top reveal">
+      <span class="stage-badge"><span class="dot"></span>TAHAP 1 · FONDASI</span>
+      <span class="meta-pill">⏱ 2–3 minggu</span>
+      <span class="meta-pill">📊 Tingkat: Pemula</span>
+      <span class="meta-pill">🎓 5 Modul</span>
+    </div>
+    <h1 class="reveal">Statistik & Logika <span class="grad">Data Dasar</span></h1>
+    <p class="lead reveal">
+      Fondasi semua yang akan kamu pelajari sebagai data analyst. Sebelum menyentuh Excel, SQL,
+      atau Python — kamu harus paham cara membaca angka, meringkas data, dan berpikir analitis.
+      Materi ini dirancang untuk pemula total, dengan banyak contoh dan latihan.
+    </p>
+    <div class="hero-info reveal">
+      <div class="info-box"><div class="info-num">5</div><div class="info-lbl">Modul Pembelajaran</div></div>
+      <div class="info-box"><div class="info-num">21</div><div class="info-lbl">Hari Belajar</div></div>
+      <div class="info-box"><div class="info-num">~20</div><div class="info-lbl">Jam Studi Total</div></div>
+      <div class="info-box"><div class="info-num">10+</div><div class="info-lbl">Soal Latihan</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ CONTENT ============ -->
+<div class="content-wrap">
+  <div class="container">
+    <div class="layout">
+      <!-- TOC -->
+      <aside class="toc">
+        <h4>Daftar Isi</h4>
+        <ul class="toc-list" id="tocList">
+          <li><a href="#m1" class="active"><span class="num">01</span>Tipe Data & Variabel</a></li>
+          <li><a href="#m2"><span class="num">02</span>Statistik Deskriptif</a></li>
+          <li><a href="#m3"><span class="num">03</span>Probabilitas</a></li>
+          <li><a href="#m4"><span class="num">04</span>Distribusi Normal & Sampling</a></li>
+          <li><a href="#m5"><span class="num">05</span>Logika Analitis & Critical Thinking</a></li>
+          <li><a href="#schedule"><span class="num">06</span>Rencana 3 Minggu</a></li>
+          <li><a href="#quiz"><span class="num">07</span>Soal Latihan</a></li>
+          <li><a href="#resources"><span class="num">08</span>Sumber Belajar</a></li>
+        </ul>
+      </aside>
+
+      <!-- ARTICLE -->
+      <div class="article">
+
+        <!-- ============ MODUL 1 ============ -->
+        <section class="mod" id="m1">
+          <div class="mod-head">
+            <span class="mod-num">MODUL 01</span>
+            <span class="mod-time">⏱ ~3 jam · Hari 1–3</span>
+          </div>
+          <h2>Tipe Data, Variabel, dan Cara Membaca Data</h2>
+          <p>
+            Sebelum kita bisa menghitung apa pun, kita perlu tahu <strong>jenis data apa yang sedang kita hadapi</strong>.
+            Bukan semua angka bisa diperlakukan sama — umur seseorang tidak bisa dijumlahkan dengan kode posnya,
+            meskipun keduanya berbentuk angka. Memahami tipe data adalah langkah pertama agar setiap analisis
+            yang kamu lakukan menghasilkan kesimpulan yang benar.
+          </p>
+
+          <h3>1.1 Mengapa Tipe Data Itu Penting?</h3>
+          <p>
+            Tipe data menentukan <em>apa yang bisa kamu lakukan</em> terhadap data tersebut. Misalnya:
+            rata-rata (mean) hanya masuk akal untuk data numerik, bukan untuk data kategori seperti warna mata.
+            Sebaliknya, modus cocok untuk kategori tapi jarang dipakai untuk data kontinu.
+            Banyak kesalahan analisis terjadi karena seseorang memperlakukan data kategori sebagai numerik —
+            atau sebaliknya. Inilah kenapa pemahaman tipe data adalah pintu gerbang semua analisis.
+          </p>
+
+          <div class="callout note">
+            <strong>Analogi:</strong> Bayangkan kamu punya keranjang berisi apel, jeruk, dan pisang.
+            Kamu tidak bisa menghitung "rata-rata buah" — tapi kamu bisa menghitung "modus" (buah apa yang
+            paling banyak). Kalau yang kamu punya berat setiap buah dalam gram, baru kamu bisa hitung
+            rata-rata. Begitu juga dengan data.
+          </div>
+
+          <h3>1.2 Empat Tipe Data Utama</h3>
+          <p>Secara garis besar, data dibagi menjadi dua keluarga besar, masing-masing punya dua anak:</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Keluarga</th>
+                <th>Sub-tipe</th>
+                <th>Definisi</th>
+                <th>Contoh</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="2"><strong>Kategorikal</strong><br>(Kualitatif)</td>
+                <td><strong>Nominal</strong></td>
+                <td>Kategori tanpa urutan. Hanya label.</td>
+                <td>Jenis kelamin, warna, nama kota, kode pos, status pernikahan</td>
+              </tr>
+              <tr>
+                <td><strong>Ordinal</strong></td>
+                <td>Kategori dengan urutan/ranking, tapi jarak antar kategori tidak tentu.</td>
+                <td>Tingkat kepuasan (sangat buruk → sangat baik), tingkat pendidikan (SD/SMA/S1/S2/S3), kelas kursi (eksekutif/bisnis/ekonomi)</td>
+              </tr>
+              <tr>
+                <td rowspan="2"><strong>Numerik</strong><br>(Kuantitatif)</td>
+                <td><strong>Diskrit</strong></td>
+                <td>Angka hasil perhitungan, biasanya bilangan bulat. Tidak ada pecahan di antaranya.</td>
+                <td>Jumlah anak, jumlah transaksi, frekuensi kemunculan</td>
+              </tr>
+              <tr>
+                <td><strong>Kontinu</strong></td>
+                <td>Angka hasil pengukuran, bisa berupa pecahan dengan presisi tak terhingga.</td>
+                <td>Tinggi badan (172.5 cm), berat (65.3 kg), waktu (3.45 detik), suhu (27.8°C)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout warn">
+            <strong>Peringatan umum:</strong> <code>Kode pos 17411</code> terlihat angka, tapi sebenarnya
+            data <em>nominal</em>. Kamu tidak bisa menghitung rata-rata kode pos! Begitu juga nomor telepon
+            dan NIS mahasiswa — walaupun ditulis angka, tetap kategori.
+          </div>
+
+          <h3>1.3 Variabel: Independen vs Dependen</h3>
+          <p>
+            Dalam analisis, kita sering ingin tahu hubungan antar dua hal. Misalnya: "Apakah jam belajar
+            mempengaruhi nilai ujian?" Di sini, <strong>jam belajar</strong> adalah <em>variabel independen</em>
+            (yang diduga menyebabkan/mempengaruhi), dan <strong>nilai ujian</strong> adalah
+            <em>variabel dependen</em> (yang dipengaruhi/dianggap akibat). Memahami arah hubungan ini krusial
+            untuk tidak salah baca korelasi sebagai kausalitas (lebih lanjut di Modul 5).
+          </p>
+
+          <h4>Ciri variabel independen (X):</h4>
+          <ul>
+            <li>Yang dimanipulasi atau dijadikan pemicu dalam analisis</li>
+            <li>Sering ditulis di sumbu X pada grafik</li>
+            <li>Biasanya kategorikal (kelompok perlakuan) atau waktu</li>
+          </ul>
+
+          <h4>Ciri variabel dependen (Y):</h4>
+          <ul>
+            <li>Yang diukur sebagai hasil akhir</li>
+            <li>Sering ditulis di sumbu Y pada grafik</li>
+            <li>Yang ingin kamu prediksi atau jelaskan</li>
+          </ul>
+
+          <div class="example">
+            <h4>Identifikasi Variabel</h4>
+            <p>Sebuah café ingin tahu apakah pemberian diskon 20% meningkatkan jumlah transaksi harian.</p>
+            <p><strong>Variabel Independen:</strong> Ada/tidaknya diskon (kategorikal — nominal: 2 kategori)<br>
+            <strong>Variabel Dependen:</strong> Jumlah transaksi harian (numerik — diskrit)</p>
+          </div>
+
+          <h3>1.4 Cara Membaca Data</h3>
+          <p>
+            Sebagai data analyst, kamu akan sering menemui data dalam berbagai bentuk. Yang paling umum
+            adalah <strong>tabel</strong> (baris × kolom) — setiap baris mewakili satu observasi (satu
+            pelanggan, satu transaksi), setiap kolom mewakili satu variabel. Tapi data juga bisa hadir
+            sebagai file CSV, JSON, atau bahkan gambar chart.
+          </p>
+
+          <h4>Empat pertanyaan wajib saat melihat dataset baru:</h4>
+          <ol>
+            <li><strong>Apa unit observasinya?</strong> (satu baris = satu apa? Pelanggan? Transaksi? Hari?)</li>
+            <li><strong>Berapa banyak baris dan kolom?</strong> (ukuran dataset)</li>
+            <li><strong>Apa tipe data tiap kolom?</strong> (numerik? kategorikal? tanggal?)</li>
+            <li><strong>Ada data yang hilang (missing) atau janggal?</strong> (nilai kosong, negatif di kolom yang seharusnya positif, dll.)</li>
+          </ol>
+
+          <div class="callout tip">
+            <strong>Praktik langsung:</strong> Buka <a href="https://www.kaggle.com/datasets" target="_blank" rel="noopener">Kaggle Datasets</a>,
+            cari dataset "Titanic" (paling populer untuk pemula), download CSV-nya, buka di Excel atau Google Sheets.
+            Lakukan 4 pertanyaan di atas. Jangan langsung menghitung apapun — pahami dulu datanya.
+          </div>
+        </section>
+
+        <!-- ============ MODUL 2 ============ -->
+        <section class="mod" id="m2">
+          <div class="mod-head">
+            <span class="mod-num">MODUL 02</span>
+            <span class="mod-time">⏱ ~6 jam · Hari 4–9</span>
+          </div>
+          <h2>Statistik Deskriptif: Mean, Median, Modus, Standar Deviasi</h2>
+          <p>
+            Setelah paham tipe data, sekarang kita belajar meringkasnya. <strong>Statistik deskriptif</strong>
+            adalah cara mengubah ratusan atau jutaan baris data menjadi beberapa angka yang bermakna.
+            Tujuannya: membuat data yang besar menjadi bisa dipahami. Dua hal yang paling sering ingin
+            kita tahu tentang data adalah <em>pusat data</em> (di mana kebanyakan nilai berada) dan
+            <em>penyebaran data</em> (seberapa lebar nilai-nilai itu tersebar).
+          </p>
+
+          <h3>2.1 Ukuran Pusat (Central Tendency)</h3>
+          <p>Tiga ukuran yang paling sering dipakai untuk meringkas data: mean, median, dan modus.</p>
+
+          <h4>1. Mean (Rata-rata Aritmetika)</h4>
+          <p>Penjumlahan semua nilai dibagi jumlah data. Paling populer, tapi sangat sensitif terhadap nilai ekstrem (outlier).</p>
+
+          <div class="formula">
+            <span style="font-size:1.5em;">x̄ = (x<span class="sub">1</span> + x<span class="sub">2</span> + ... + x<span class="sub">n</span>) / n</span>
+            <span class="where">di mana: <code>x̄</code> = mean, <code>x<span class="sub">i</span></code> = nilai ke-i, <code>n</code> = banyaknya data</span>
+          </div>
+
+          <div class="example">
+            <h4>Hitung Mean Nilai Ujian</h4>
+            <p>Nilai 7 mahasiswa: <strong>75, 80, 85, 70, 90, 95, 65</strong></p>
+            <div class="calc">
+              jumlah = 75+80+85+70+90+95+65 = 560<br>
+              n = 7<br>
+              mean = 560 / 7 = <span style="color:var(--accent)">80</span>
+            </div>
+            <p>Jadi rata-rata nilai kelas tersebut adalah <strong>80</strong>.</p>
+          </div>
+
+          <div class="callout warn">
+            <strong>Hati-hati dengan outlier:</strong> Bayangkan satu mahasiswa nilainya <strong>999</strong>
+            (misal karena kesalahan input). Mean jadi: (560 − 65 + 999) / 7 = <strong>213.6</strong>.
+            Padahal hampir semua mahasiswa nilainya di bawah 100! Inilah kenapa mean tidak selalu menjadi
+            ukuran terbaik.
+          </div>
+
+          <h4>2. Median (Nilai Tengah)</h4>
+          <p>Nilai di tengah ketika data sudah diurutkan. Lebih tahan terhadap outlier — cocok untuk data skewed seperti gaji, harga rumah, dll.</p>
+
+          <div class="formula">
+            <span style="font-size:1.3em;">Median =</span><br>
+            <span style="font-size:1.05em;">nilai ke (n+1)/2, jika n ganjil</span><br>
+            <span style="font-size:1.05em;">rata-rata dua nilai tengah, jika n genap</span>
+          </div>
+
+          <div class="example">
+            <h4>Hitung Median</h4>
+            <p>Data sama: 75, 80, 85, 70, 90, 95, 65. Urutkan: <strong>65, 70, 75, 80, 85, 90, 95</strong></p>
+            <div class="calc">
+              n = 7 (ganjil) → posisi tengah = (7+1)/2 = 4<br>
+              Median = nilai ke-4 = <span style="color:var(--accent)">80</span>
+            </div>
+            <p>Coba sekarang ganti 65 dengan 999 (outlier). Urutkan: <strong>75, 80, 85, 90, 95, 999</strong> →
+            n=6 genap, ambil rata-rata nilai ke-3 dan ke-4: (85+90)/2 = <strong>87.5</strong>. Median tetap
+            "masuk akal", sementara mean tadi melonjak ke ratusan.</p>
+          </div>
+
+          <h4>3. Modus (Nilai yang Paling Sering Muncul)</h4>
+          <p>Modus cocok untuk data kategorikal, bisa juga untuk data numerik (terutama yang diskrit). Modus bisa lebih dari satu (bimodal, multimodal).</p>
+
+          <div class="example">
+            <h4>Modus Penggunaan Sehari-hari</h4>
+            <p>Survei 12 mahasiswa tentang aplikasi yang paling sering dibuka pagi hari: <strong>Instagram, Instagram, TikTok, Instagram, Twitter, TikTok, TikTok, TikTok, Instagram, YouTube, Instagram, TikTok</strong></p>
+            <div class="calc">
+              Hitung: Instagram = 5 kali, TikTok = 5 kali, Twitter = 1, YouTube = 1<br>
+              Modus = <span style="color:var(--accent)">Instagram dan TikTok (bimodal)</span>
+            </div>
+            <p>Modus memberi info perilaku mayoritas yang tidak bisa dilihat dari mean/median.</p>
+          </div>
+
+          <h3>2.2 Kapan Pakai Mean vs Median?</h3>
+          <table>
+            <thead>
+              <tr><th>Situasi</th><th>Gunakan</th><th>Alasan</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Data simetris, tidak ada outlier</td><td><strong>Mean</strong></td><td>Memperhitungkan semua nilai</td></tr>
+              <tr><td>Data skewed / ada outlier</td><td><strong>Median</strong></td><td>Tahan terhadap nilai ekstrem</td></tr>
+              <tr><td>Data kategorikal (nominal)</td><td><strong>Modus</strong></td><td>Mean/median tidak masuk akal</td></tr>
+              <tr><td>Data ordinal (sangat buruk → sangat baik)</td><td><strong>Median</strong></td><td>Jarak antar kategori tidak tentu</td></tr>
+            </tbody>
+          </table>
+
+          <div class="callout tip">
+            <strong>Aturan praktis:</strong> Kalau mean dan median hampir sama, datanya simetris.
+            Kalau selisihnya besar (biasanya mean &gt; median), datanya skewed ke kanan (ada outlier tinggi,
+            mis. gaji CEO di antara karyawan biasa). Sebaliknya, skewed ke kiri.
+          </div>
+
+          <h3>2.3 Ukuran Penyebaran (Dispersion)</h3>
+          <p>Mean saja tidak cukup. Dua dataset dengan mean sama bisa sangat berbeda karakter. Misalnya kelas A: nilai semua 80. Kelas B: nilai 50, 60, 80, 100, 110. Mean kedua kelas sama (80), tapi kelas B jauh lebih bervariasi.</p>
+
+          <h4>1. Range (Rentang)</h4>
+          <p>Selisih nilai maksimum dan minimum. Sederhana, tapi sangat sensitif terhadap outlier.</p>
+          <div class="formula">
+            <span style="font-size:1.4em;">Range = X<span class="sub">max</span> − X<span class="sub">min</span></span>
+          </div>
+
+          <h4>2. Varians dan Standar Deviasi</h4>
+          <p>Ukuran penyebaran yang paling sering dipakai. Standar deviasi (σ atau s) adalah akar dari varians, dan satuannya sama dengan data asli — jadi lebih mudah diinterpretasikan.</p>
+
+          <div class="formula">
+            <span style="font-size:1.25em;">σ = √( Σ(x<span class="sub">i</span> − x̄)<span class="sup">2</span> / N )</span>
+            <span class="where">
+              <strong>σ</strong> = standar deviasi populasi · <strong>s</strong> = standar deviasi sampel (gunakan N−1 di penyebut)<br>
+              <code>x<span class="sub">i</span></code> = tiap nilai · <code>x̄</code> = mean · <code>N</code> = ukuran populasi
+            </span>
+          </div>
+
+          <div class="example">
+            <h4>Hitung Standar Deviasi</h4>
+            <p>Data: <strong>4, 8, 6, 5, 7</strong> (n = 5). Mean = (4+8+6+5+7)/5 = 6.</p>
+            <div class="calc">
+              (4−6)² + (8−6)² + (6−6)² + (5−6)² + (7−6)²
+              = 4 + 4 + 0 + 1 + 1 = 10<br>
+              Varians (populasi) = 10 / 5 = 2<br>
+              Standar deviasi σ = √2 ≈ <span style="color:var(--accent)">1.41</span>
+            </div>
+            <p>Interpretasi: nilai-nilai data rata-rata menyimpang sekitar <strong>1.41 satuan</strong> dari mean (6).</p>
+          </div>
+
+          <h4>3. Kuartil dan IQR (Interquartile Range)</h4>
+          <p>Kuartil membagi data terurut menjadi 4 bagian sama besar. <strong>Q1</strong> = nilai di 25%, <strong>Q2</strong> = median (50%), <strong>Q3</strong> = nilai di 75%. IQR = Q3 − Q1, menggambarkan rentang data "tengah" yang tidak terpengaruh outlier.</p>
+
+          <div class="callout note">
+            <strong>IQR dan outlier:</strong> Aturan umum — nilai dianggap outlier jika &lt; Q1 − 1.5×IQR atau &gt; Q3 + 1.5×IQR.
+            Metode ini dipakai untuk membuat boxplot, salah satu chart paling penting di analisis data.
+          </div>
+
+          <h3>2.4 Ringkasan dalam 5 Angka (Five-Number Summary)</h3>
+          <p>Untuk gambaran cepat tentang data, statistisi menggunakan 5 angka: <strong>Minimum, Q1, Median, Q3, Maximum</strong>. Inilah yang ditampilkan dalam boxplot. Pelajari baik-baik — kamu akan sering membuat chart ini nanti.</p>
+
+          <div class="chart-wrap">
+            <div class="chart-title">Visualisasi Boxplot</div>
+            <svg class="chart" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="bx" x1="0" x2="1">
+                  <stop offset="0" stop-color="#5b8cff"/>
+                  <stop offset="1" stop-color="#7a5cff"/>
+                </linearGradient>
+              </defs>
+              <!-- axis -->
+              <line x1="40" y1="160" x2="560" y2="160" stroke="#253251" stroke-width="2"/>
+              <!-- whisker left -->
+              <line x1="100" y1="100" x2="200" y2="100" stroke="#a8b5cf" stroke-width="2"/>
+              <line x1="100" y1="90" x2="100" y2="110" stroke="#a8b5cf" stroke-width="2"/>
+              <!-- box -->
+              <rect x="200" y="70" width="220" height="60" fill="url(#bx)" opacity="0.25" stroke="#5b8cff" stroke-width="2" rx="4"/>
+              <!-- median line -->
+              <line x1="310" y1="70" x2="310" y2="130" stroke="#22d3ee" stroke-width="3"/>
+              <!-- whisker right -->
+              <line x1="420" y1="100" x2="540" y2="100" stroke="#a8b5cf" stroke-width="2"/>
+              <line x1="540" y1="90" x2="540" y2="110" stroke="#a8b5cf" stroke-width="2"/>
+              <!-- labels -->
+              <text x="100" y="180" fill="#6f7e9c" font-size="11" text-anchor="middle" font-family="JetBrains Mono">Min</text>
+              <text x="200" y="180" fill="#6f7e9c" font-size="11" text-anchor="middle" font-family="JetBrains Mono">Q1</text>
+              <text x="310" y="180" fill="#22d3ee" font-size="11" text-anchor="middle" font-family="JetBrains Mono">Median</text>
+              <text x="420" y="180" fill="#6f7e9c" font-size="11" text-anchor="middle" font-family="JetBrains Mono">Q3</text>
+              <text x="540" y="180" fill="#6f7e9c" font-size="11" text-anchor="middle" font-family="JetBrains Mono">Max</text>
+              <text x="570" y="60" fill="#a8b5cf" font-size="11" text-anchor="middle">IQR</text>
+              <line x1="200" y1="55" x2="420" y2="55" stroke="#a8b5cf" stroke-width="1"/>
+              <line x1="200" y1="50" x2="200" y2="60" stroke="#a8b5cf" stroke-width="1"/>
+              <line x1="420" y1="50" x2="420" y2="60" stroke="#a8b5cf" stroke-width="1"/>
+            </svg>
+            <div class="chart-cap">Boxplot menampilkan kelima angka ringkasan sekaligus. Garis tengah = median, kotak = IQR, whisker = jangkauan data, titik di luar whisker = outlier.</div>
+          </div>
+        </section>
+
+        <!-- ============ MODUL 3 ============ -->
+        <section class="mod" id="m3">
+          <div class="mod-head">
+            <span class="mod-num">MODUL 03</span>
+            <span class="mod-time">⏱ ~4 jam · Hari 10–13</span>
+          </div>
+          <h2>Probabilitas: Konsep Dasar & Aturan</h2>
+          <p>
+            Probabilitas adalah bahasa ketidakpastian. Sebagai data analyst, kamu tidak pernah tahu
+            sesuatu dengan 100% yakin — kamu hanya tahu seberapa mungkin. Probabilitas jadi dasar
+            untuk A/B testing, machine learning, dan semua keputusan berbasis data. Konsepnya
+            sederhana, tapi penerapannya luas.
+          </p>
+
+          <h3>3.1 Apa itu Probabilitas?</h3>
+          <p>Probabilitas adalah angka antara 0 dan 1 yang menyatakan kemungkinan suatu peristiwa terjadi.</p>
+
+          <div class="formula">
+            <span style="font-size:1.4em;">P(A) = jumlah kejadian A / total kejadian mungkin</span>
+            <span class="where">P(A) = probabilitas peristiwa A. Rentang: 0 (mustahil) ≤ P ≤ 1 (pasti)</span>
+          </div>
+
+          <div class="example">
+            <h4>Probabilitas Dadu</h4>
+            <p>Peluang muncul angka 4 saat melempar satu dadu:</p>
+            <div class="calc">
+              Total sisi = 6, kejadian "muncul 4" = 1 sisi<br>
+              P(4) = 1/6 ≈ <span style="color:var(--accent)">0.167 atau 16.7%</span>
+            </div>
+          </div>
+
+          <h3>3.2 Aturan Penjumlahan (OR)</h3>
+          <p>Untuk dua peristiwa yang <em>mutually exclusive</em> (tidak bisa terjadi bersamaan, mis. hasil lempar dadu tidak mungkin 4 DAN 5 sekaligus):</p>
+          <div class="formula">
+            <span style="font-size:1.4em;">P(A atau B) = P(A) + P(B)</span>
+          </div>
+          <p>Untuk peristiwa yang bisa terjadi bersamaan (mis. mahasiswa suka matematika DAN suka olahraga), gunakan:</p>
+          <div class="formula">
+            <span style="font-size:1.4em;">P(A atau B) = P(A) + P(B) − P(A dan B)</span>
+          </div>
+
+          <h3>3.3 Aturan Perkalian (AND)</h3>
+          <p>Untuk dua peristiwa <em>independen</em> (terjadinya satu tidak mempengaruhi yang lain, mis. dua lempar dadu):</p>
+          <div class="formula">
+            <span style="font-size:1.4em;">P(A dan B) = P(A) × P(B)</span>
+          </div>
+          <p>Untuk peristiwa dependen (terjadinya B bergantung pada A), gunakan <strong>probabilitas bersyarat</strong>:</p>
+          <div class="formula">
+            <span style="font-size:1.4em;">P(A dan B) = P(A) × P(B | A)</span>
+            <span class="where">P(B | A) = probabilitas B terjadi, dengan asumsi A sudah terjadi</span>
+          </div>
+
+          <div class="example">
+            <h4>Probabilitas Bersyarat</h4>
+            <p>Dari 100 mahasiswa: 60 suka kopi, 40 suka teh. Dari 60 pecinta kopi, 24 juga suka teh. Berapa peluang mahasiswa suka teh <em>dengan asumsi</em> dia suka kopi?</p>
+            <div class="calc">
+              P(Teh | Kopi) = jumlah suka kopi DAN teh / jumlah suka kopi<br>
+              = 24 / 60 = <span style="color:var(--accent)">0.4 atau 40%</span>
+            </div>
+            <p>Bandingkan dengan P(Teh) total = 40/100 = 40%. Ternyata sama — artinya suka kopi dan suka teh <em>independen</em> di kelompok ini.</p>
+          </div>
+
+          <h3>3.4 Distribusi Probabilitas</h3>
+          <p>
+            Distribusi probabilitas adalah fungsi yang memberi tahu <strong>peluang setiap kemungkinan nilai</strong>.
+            Untuk data diskrit, ini berupa tabel. Untuk data kontinu, ini berupa kurva (kurva di bawah
+            jumlahnya = 1). Memahami distribusi membantu kita tahu apakah suatu nilai "biasa" atau "jarang".
+          </p>
+
+          <h4>Distribusi yang penting untuk data analyst:</h4>
+          <ul>
+            <li><strong>Binomial</strong> — jumlah "sukses" dalam n percobaan ya/tidak (mis. berapa pembeli yang benar-benar checkout dari 100 yang klik)</li>
+            <li><strong>Poisson</strong> — jumlah kejadian dalam interval waktu/tempat (mis. jumlah panggilan客服 per jam)</li>
+            <li><strong>Uniform</strong> — semua nilai sama mungkin (mis. dadu bersisi)</li>
+            <li><strong>Normal</strong> — kurva lonceng, yang paling sering muncul (detail di Modul 4)</li>
+          </ul>
+        </section>
+
+        <!-- ============ MODUL 4 ============ -->
+        <section class="mod" id="m4">
+          <div class="mod-head">
+            <span class="mod-num">MODUL 04</span>
+            <span class="mod-time">⏱ ~4 jam · Hari 14–17</span>
+          </div>
+          <h2>Distribusi Normal & Sampling</h2>
+          <p>
+            Distribusi normal adalah salah satu konsep paling penting dalam seluruh statistik. Banyak
+            fenomena alam dan sosial mengikuti distribusi ini: tinggi badan manusia, tekanan darah,
+            nilai IQ, kesalahan pengukuran. Memahami distribusi normal membuka pintu ke inferensi
+            statistik — yaitu membuat kesimpulan tentang populasi dari sampel.
+          </p>
+
+          <h3>4.1 Karakteristik Distribusi Normal</h3>
+          <p>Distribusi normal adalah kurva berbentuk lonceng yang simetris, dengan ciri-ciri:</p>
+          <ul>
+            <li>Simetris sempurna di sekitar mean (mean = median = modus)</li>
+            <li>72% data berada dalam 1 standar deviasi dari mean (Empirical Rule / 68-95-99.7)</li>
+            <li>Total luas di bawah kurva = 1</li>
+            <li>Mendekati sumbu-x di kedua ujung tapi tidak pernah menyentuhnya</li>
+          </ul>
+
+          <div class="chart-wrap">
+            <div class="chart-title">Kurva Distribusi Normal & Aturan Empiris (68-95-99.7)</div>
+            <svg class="chart" viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="bell" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#5b8cff" stop-opacity="0.35"/>
+                  <stop offset="1" stop-color="#5b8cff" stop-opacity="0.05"/>
+                </linearGradient>
+                <linearGradient id="bell2" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#22d3ee" stop-opacity="0.25"/>
+                  <stop offset="1" stop-color="#22d3ee" stop-opacity="0.02"/>
+                </linearGradient>
+                <linearGradient id="bell3" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#34d399" stop-opacity="0.15"/>
+                  <stop offset="1" stop-color="#34d399" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <!-- shaded areas: 99.7% (3σ) -->
+              <path d="M 60 200 Q 100 200 130 195 Q 170 180 200 130 Q 230 70 300 50 Q 370 70 400 130 Q 430 180 470 195 Q 500 200 540 200 L 540 200 L 60 200 Z" fill="url(#bell3)"/>
+              <!-- 95% (2σ) -->
+              <path d="M 130 200 Q 170 180 200 130 Q 230 70 300 50 Q 370 70 400 130 Q 430 180 470 200 L 470 200 L 130 200 Z" fill="url(#bell2)"/>
+              <!-- 68% (1σ) -->
+              <path d="M 200 200 Q 230 70 300 50 Q 370 70 400 200 L 400 200 L 200 200 Z" fill="url(#bell)"/>
+              <!-- the bell curve outline -->
+              <path d="M 60 200 Q 100 200 130 195 Q 170 180 200 130 Q 230 70 300 50 Q 370 70 400 130 Q 430 180 470 195 Q 500 200 540 200"
+                fill="none" stroke="#5b8cff" stroke-width="2.5"/>
+              <!-- vertical lines at σ -->
+              <line x1="200" y1="200" x2="200" y2="130" stroke="#a8b5cf" stroke-width="1" stroke-dasharray="3,3"/>
+              <line x1="400" y1="200" x2="400" y2="130" stroke="#a8b5cf" stroke-width="1" stroke-dasharray="3,3"/>
+              <line x1="130" y1="200" x2="130" y2="195" stroke="#a8b5cf" stroke-width="1" stroke-dasharray="3,3"/>
+              <line x1="470" y1="200" x2="470" y2="195" stroke="#a8b5cf" stroke-width="1" stroke-dasharray="3,3"/>
+              <line x1="300" y1="200" x2="300" y2="50" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="4,4"/>
+              <!-- baseline -->
+              <line x1="40" y1="200" x2="560" y2="200" stroke="#253251" stroke-width="2"/>
+              <!-- labels -->
+              <text x="300" y="220" fill="#22d3ee" font-size="13" text-anchor="middle" font-weight="700">μ (mean)</text>
+              <text x="200" y="220" fill="#a8b5cf" font-size="11" text-anchor="middle" font-family="JetBrains Mono">μ−σ</text>
+              <text x="400" y="220" fill="#a8b5cf" font-size="11" text-anchor="middle" font-family="JetBrains Mono">μ+σ</text>
+              <text x="130" y="220" fill="#a8b5cf" font-size="11" text-anchor="middle" font-family="JetBrains Mono">μ−2σ</text>
+              <text x="470" y="220" fill="#a8b5cf" font-size="11" text-anchor="middle" font-family="JetBrains Mono">μ+2σ</text>
+              <!-- percentages -->
+              <text x="300" y="120" fill="#fff" font-size="13" text-anchor="middle" font-weight="700">68%</text>
+              <text x="165" y="170" fill="#22d3ee" font-size="11" text-anchor="middle">13.5%</text>
+              <text x="435" y="170" fill="#22d3ee" font-size="11" text-anchor="middle">13.5%</text>
+              <text x="95" y="200" fill="#34d399" font-size="11" text-anchor="middle">2.35%</text>
+              <text x="505" y="200" fill="#34d399" font-size="11" text-anchor="middle">2.35%</text>
+            </svg>
+            <div class="chart-cap">Aturan Empiris: 68% data berada di ±1σ, 95% di ±2σ, 99.7% di ±3σ dari mean.</div>
+          </div>
+
+          <h3>4.2 Z-Score: Standarisasi Nilai</h3>
+          <p>Z-score menyatakan <strong>seberapa jauh sebuah nilai dari mean, dalam satuan standar deviasi</strong>. Berguna untuk membandingkan nilai dari distribusi yang berbeda.</p>
+
+          <div class="formula">
+            <span style="font-size:1.5em;">Z = (x − μ) / σ</span>
+            <span class="where">x = nilai · μ = mean populasi · σ = standar deviasi</span>
+          </div>
+
+          <div class="example">
+            <h4>Z-Score untuk Membandingkan</h4>
+            <p>Andi ujian matematika skor 85, rata-rata kelas 75, σ = 5. Budi ujian fisika skor 90, rata-rata kelas 80, σ = 10. Siapa lebih baik secara relatif?</p>
+            <div class="calc">
+              Z Andi = (85 − 75) / 5 = <span style="color:var(--accent)">+2.0</span><br>
+              Z Budi = (90 − 80) / 10 = <span style="color:var(--accent)">+1.0</span>
+            </div>
+            <p>Meski Budi angkanya lebih tinggi, Andi lebih unggul secara relatif karena dia 2σ di atas rata-rata, sementara Budi hanya 1σ.</p>
+          </div>
+
+          <h3>4.3 Central Limit Theorem (CLT)</h3>
+          <p>
+            Ini adalah "sihir" statistik yang membuat banyak hal bisa dikerjakan. CLT menyatakan:
+            <em>jika kamu mengambil banyak sampel acak dari populasi (apa pun bentuk distribusinya)
+            dan menghitung rata-rata setiap sampel, distribusi rata-rata sampel tersebut akan
+            mendekati distribusi normal</em> — asalkan ukuran sampel cukup besar (umumnya n ≥ 30).
+          </p>
+
+          <div class="callout note">
+            <strong>Mengapa CLT penting?</strong> Karena memungkinkan kita membuat inferensi tentang
+            populasi hanya dari sampel. Tidak perlu mengukur seluruh populasi (yang sering tidak mungkin) —
+            cukup ambil sampel, hitung statistik, dan pakai distribusi normal untuk mengestimasi.
+          </div>
+
+          <h3>4.4 Sampling: Cara Mengambil Sampel yang Baik</h3>
+          <p>Sampel yang buruk menghasilkan kesimpulan yang buruk. Untuk hasil yang bisa dipercaya, gunakan metode sampling yang meminimalkan bias.</p>
+
+          <table>
+            <thead><tr><th>Metode</th><th>Cara Kerja</th><th>Kelebihan / Kekurangan</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Random Sampling</strong></td><td>Setiap anggota populasi punya peluang sama untuk terpilih</td><td>Emas standar. Sulit dilakukan di populasi besar.</td></tr>
+              <tr><td><strong>Stratified</strong></td><td>Populasi dibagi strata (mis. jenis kelamin), lalu sampel acak tiap strata</td><td>Memastikan semua kelompok terwakili.</td></tr>
+              <tr><td><strong>Systematic</strong></td><td>Ambil tiap ke-kali (mis. setiap pelanggan ke-10)</td><td>Sederhana, tapi bisa bias kalau ada pola tersembunyi.</td></tr>
+              <tr><td><strong>Cluster</strong></td><td>Bagi populasi jadi cluster, ambil cluster utuh secara acak</td><td>Hemat, tapi cluster harus homogen di dalamnya.</td></tr>
+              <tr><td><strong>Convenience</strong></td><td>Ambil yang mudah dijangkau (mis. survey online)</td><td><strong>Tidak bisa digeneralisasi.</strong> Hati-hati!</td></tr>
+            </tbody>
+          </table>
+
+          <div class="callout warn">
+            <strong>Sampling bias = kesimpulan salah.</strong> Pemilu 1936 di AS, majalah Literary Digest
+            mensurvey 10 juta orang (sampel besar!) tapi hasil prediksi salah total, karena sampelnya
+            didapat dari pemilik mobil dan pelanggan telepon — kelompok yang lebih kaya dari rata-rata
+            pemilih. Ukuran sampel besar tidak menolong jika metodenya bias.
+          </div>
+        </section>
+
+        <!-- ============ MODUL 5 ============ -->
+        <section class="mod" id="m5">
+          <div class="mod-head">
+            <span class="mod-num">MODUL 05</span>
+            <span class="mod-time">⏱ ~3 jam · Hari 18–21</span>
+          </div>
+          <h2>Logika Analitis & Critical Thinking</h2>
+          <p>
+            Skill teknis saja tidak cukup. Yang membedakan data analyst hebat dari yang biasa-biasa saja
+            adalah kemampuan berpikir kritis — mengajukan pertanyaan yang tepat, mengenali bias,
+            membedakan korelasi dari kausalitas, dan tidak mudah percaya pada angka mentah. Modul ini
+            adalah pelatihan mental, bukan rumus.
+          </p>
+
+          <h3>5.1 Apa itu Critical Thinking?</h3>
+          <p>
+            Critical thinking adalah proses berpikir yang sistematis, terbuka terhadap keraguan, dan
+            berdasarkan bukti. Seorang data analyst yang kritis akan bertanya: "Apakah kesimpulan ini
+            berdasar data yang cukup? Apakah ada penjelasan alternatif? Apakah angka ini dimanipulasi
+            atau dilihat dari sudut yang menyesatkan?"
+          </p>
+
+          <h4>Empat pertanyaan wajib sebelum percaya sebuah klaim data:</h4>
+          <ol>
+            <li><strong>Sumbernya kredibel?</strong> Siapa yang menyatakan? Apa kepentingannya?</li>
+            <li><strong>Datanya seperti apa?</strong> Berapa sampelnya? Bagaimana metode pengumpulannya?</li>
+            <li><strong>Apakah ada penjelasan alternatif?</strong> Apakah bisa jadi kebetulan, atau ada faktor lain?</li>
+            <li><strong>Apakah kesimpulannya sepadan dengan bukti?</strong> Apakah klaimnya terlalu kuat untuk data yang ada?</li>
+          </ol>
+
+          <h3>5.2 Bias Kognitif yang Sering Muncul</h3>
+          <p>
+            Otak kita punya shortcut bawaan yang kadang menyesatkan. Mengenali bias ini membantu kita
+            menghindari kesalahan analisis yang umum.
+          </p>
+
+          <table>
+            <thead><tr><th>Bias</th><th>Definisi</th><th>Contoh dalam Data</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Confirmation Bias</strong></td><td>Mencari bukti yang mendukung keyakinan, mengabaikan yang menentang</td><td>Hanya menampilkan grafik yang mendukung hipotesis awal</td></tr>
+              <tr><td><strong>Survivorship Bias</strong></td><td>Hanya melihat yang "selamat", lupa pada yang gagal</td><td>Menganalisis startup sukses tanpa melihat ribuan yang gagal</td></tr>
+              <tr><td><strong>Anchoring</strong></td><td>Terlalu terpengaruh angka pertama yang dilihat</td><td>Promo "asli Rp 500rb, diskon jadi Rp 200rb" membuat harga 200rb terlihat murah</td></tr>
+              <tr><td><strong>Sunk Cost</strong></td><td>Meneruskan keputusan karena sudah investasi besar</td><td>Mempertahankan model ML yang sudah dibuat meski jelek performanya</td></tr>
+              <tr><td><strong>Recency Bias</strong></td><td>Memberi bobot lebih ke peristiwa terbaru</td><td>Prediksi tren berbasis 1 bulan terakhir, abaikan pola historis</td></tr>
+            </tbody>
+          </table>
+
+          <div class="callout warn">
+            <strong>Contoh klasik survivorship bias:</strong> WW II, militer AS menganalisis pesawat
+            yang kembali dari pertempuran untuk memperkuat bagian yang berlubang. Abraham Wald justru
+            menyuruh memperkuat bagian yang <em>tidak</em> berlubang — karena pesawat yang tertembus di
+            bagian itu tidak pernah kembali untuk dianalisis!
+          </div>
+
+          <h3>5.3 Korelasi ≠ Kausalitas</h3>
+          <p>Salah satu jebakan paling berbahaya dalam analisis data. Dua variabel bergerak bersamaan tidak berarti satu menyebabkan yang lain.</p>
+
+          <div class="chart-wrap">
+            <div class="chart-title">Tiga Tipe Hubungan Antar Variabel</div>
+            <svg class="chart" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                  <path d="M0,0 L0,6 L9,3 z" fill="#22d3ee"/>
+                </marker>
+              </defs>
+              <!-- Causal -->
+              <text x="100" y="40" fill="#34d399" font-size="13" text-anchor="middle" font-weight="700">Kausalitas (A → B)</text>
+              <circle cx="60" cy="100" r="22" fill="#5b8cff" opacity="0.3" stroke="#5b8cff" stroke-width="2"/>
+              <text x="60" y="105" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">A</text>
+              <line x1="85" y1="100" x2="115" y2="100" stroke="#34d399" stroke-width="2" marker-end="url(#arr)"/>
+              <circle cx="140" cy="100" r="22" fill="#f472b6" opacity="0.3" stroke="#f472b6" stroke-width="2"/>
+              <text x="140" y="105" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">B</text>
+              <text x="100" y="160" fill="#a8b5cf" font-size="11" text-anchor="middle">Penjualan iklan → Penjualan</text>
+
+              <!-- Confounder -->
+              <text x="300" y="40" fill="#fbbf24" font-size="13" text-anchor="middle" font-weight="700">Confounder (C → A & B)</text>
+              <circle cx="300" cy="75" r="22" fill="#fbbf24" opacity="0.3" stroke="#fbbf24" stroke-width="2"/>
+              <text x="300" y="80" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">C</text>
+              <line x1="288" y1="93" x2="262" y2="118" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr)"/>
+              <line x1="312" y1="93" x2="338" y2="118" stroke="#fbbf24" stroke-width="2" marker-end="url(#arr)"/>
+              <circle cx="250" cy="140" r="22" fill="#5b8cff" opacity="0.3" stroke="#5b8cff" stroke-width="2"/>
+              <text x="250" y="145" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">A</text>
+              <circle cx="350" cy="140" r="22" fill="#f472b6" opacity="0.3" stroke="#f472b6" stroke-width="2"/>
+              <text x="350" y="145" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">B</text>
+              <text x="300" y="190" fill="#a8b5cf" font-size="11" text-anchor="middle">Es krim & tenggelam (penyebab: musim panas)</text>
+
+              <!-- Coincidence -->
+              <text x="500" y="40" fill="#fb923c" font-size="13" text-anchor="middle" font-weight="700">Kebetulan (A ⊥ B)</text>
+              <circle cx="450" cy="100" r="22" fill="#5b8cff" opacity="0.3" stroke="#5b8cff" stroke-width="2"/>
+              <text x="450" y="105" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">A</text>
+              <circle cx="550" cy="100" r="22" fill="#f472b6" opacity="0.3" stroke="#f472b6" stroke-width="2"/>
+              <text x="550" y="105" fill="#fff" font-size="12" text-anchor="middle" font-weight="700">B</text>
+              <text x="500" y="160" fill="#a8b5cf" font-size="11" text-anchor="middle">Penjualan Nokia & pernikahan</text>
+            </svg>
+            <div class="chart-cap">Tiga jenis hubungan. Hanya yang pertama (kausalitas) yang membenarkan rekomendasi tindakan berbasis data.</div>
+          </div>
+
+          <p>Untuk membuktikan kausalitas, biasanya dibutuhkan <strong>eksperimen terkontrol</strong> (A/B testing) — bukan sekadar observasi. Itulah kenapa A/B testing jadi emas standar di banyak perusahaan.</p>
+
+          <h3>5.4 Framework Berpikir Analitis</h3>
+          <p>Beberapa framework yang berguna untuk mengorganisir analisis:</p>
+
+          <h4>1. 5W1H</h4>
+          <p>Tanyakan: <strong>What</strong> (apa yang terjadi), <strong>Why</strong> (kenapa), <strong>When</strong> (kapan), <strong>Where</strong> (di mana), <strong>Who</strong> (siapa), <strong>How</strong> (bagaimana). Cocok untuk eksplorasi masalah bisnis.</p>
+
+          <h4>2. MECE (Mutually Exclusive, Collectively Exhaustive)</h4>
+          <p>Bagi masalah menjadi sub-bagian yang <strong>tidak tumpang tindih</strong> dan <strong>menyeluruh</strong>. Mis. untuk analisis penurunan revenue: pecah jadi (a) penurunan jumlah pelanggan, (b) penurunan transaksi per pelanggan, (c) penurunan nilai per transaksi. Tiga ini saling lepas dan menjelaskan 100% penurunan revenue.</p>
+
+          <h4>3. Hypothesis-Driven</h4>
+          <p>Mulai dengan hipotesis ("Saya rasa penurunan karena kompetitor baru"), lalu cari data untuk menguji hipotesis tersebut — bukan menggali data tanpa arah. Ini menghemat waktu dan membuat analisis fokus.</p>
+
+          <div class="callout tip">
+            <strong>Latihan mental harian:</strong> Setiap kali kamu melihat berita atau klaim berbasis
+            data, tanyakan minimal satu pertanyaan kritis. "Apakah sampelnya mewakili?", "Apakah ada
+            penjelasan alternatif?", "Apakah metrik yang dipakai tepat?" Latih otot ini — skill ini
+            lebih tahan lama dari tools apapun.
+          </div>
+        </section>
+
+        <!-- ============ SCHEDULE ============ -->
+        <section class="mod" id="schedule">
+          <div class="mod-head">
+            <span class="mod-num">PRAKTIK</span>
+            <span class="mod-time">⏱ Selama 21 hari</span>
+          </div>
+          <h2>Rencana Belajar 3 Minggu</h2>
+          <p>
+            Konsistensi mengalahkan intensitas. Alokasikan <strong>1 jam per hari</strong>, 5 hari per minggu
+            (2 hari untuk review/latihan). Total ~15-20 jam. Sesuaikan kecepatan dengan pemahamanmu —
+            lebih baik paham separuh daripada terburu-buru menyelesaikan semuanya.
+          </p>
+
+          <div class="schedule">
+            <div class="week">
+              <div class="week-h">
+                <div class="week-num">1</div>
+                <div><h4>Minggu 1</h4><div class="sub">Fondasi Tipe Data & Statistika</div></div>
+              </div>
+              <ul>
+                <li><strong>Hari 1:</strong> Baca Modul 1 (Tipe Data). Cari 5 contoh dataset dari sekitarmu</li>
+                <li><strong>Hari 2:</strong> Identifikasi tipe data tiap kolom (Kaggle Titanic)</li>
+                <li><strong>Hari 3:</strong> Mulai Modul 2. Latih hitung mean manual</li>
+                <li><strong>Hari 4:</strong> Median & modus. Latih 5 soal</li>
+                <li><strong>Hari 5:</strong> Standar deviasi & kuartil. Buka Khan Academy</li>
+                <li><strong>Akhir minggu:</strong> Review + buat ringkasan pribadi</li>
+              </ul>
+            </div>
+
+            <div class="week">
+              <div class="week-h">
+                <div class="week-num">2</div>
+                <div><h4>Minggu 2</h4><div class="sub">Probabilitas & Distribusi</div></div>
+              </div>
+              <ul>
+                <li><strong>Hari 8:</strong> Modul 3. Konsep dasar probabilitas</li>
+                <li><strong>Hari 9:</strong> Aturan penjumlahan & perkalian</li>
+                <li><strong>Hari 10:</strong> Probabilitas bersyarat (latihan 5 soal)</li>
+                <li><strong>Hari 11:</strong> Modul 4. Distribusi normal (Khan Academy)</li>
+                <li><strong>Hari 12:</strong> Z-score & empirical rule</li>
+                <li><strong>Akhir minggu:</strong> CLT & sampling. Buat catatan</li>
+              </ul>
+            </div>
+
+            <div class="week">
+              <div class="week-h">
+                <div class="week-num">3</div>
+                <div><h4>Minggu 3</h4><div class="sub">Critical Thinking & Evaluasi</div></div>
+              </div>
+              <ul>
+                <li><strong>Hari 15:</strong> Modul 5. Critical thinking</li>
+                <li><strong>Hari 16:</strong> Bias kognitif. Cari 3 contoh dari berita</li>
+                <li><strong>Hari 17:</strong> Korelasi vs kausalitas. Analisis 1 kasus nyata</li>
+                <li><strong>Hari 18:</strong> Framework: 5W1H, MECE</li>
+                <li><strong>Hari 19:</strong> Kerjakan kuis di bawah</li>
+                <li><strong>Akhir minggu:</strong> Refleksi. Apa yang sudah paham? Apa belum?</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="callout note">
+            <strong>Cek kemampuan akhir minggu 3:</strong> Kamu harus bisa (1) menjelaskan beda mean vs
+            median dengan contoh, (2) menghitung z-score dan menjelaskan maknanya, (3) mengenali minimal
+            3 bias kognitif dalam klaim berita, dan (4) menjelaskan beda korelasi & kausalitas dengan
+            contoh. Kalau semua bisa, lanjut ke Tahap 2 (Excel).
+          </div>
+        </section>
+
+        <!-- ============ QUIZ ============ -->
+        <section class="mod" id="quiz">
+          <div class="mod-head">
+            <span class="mod-num">EVALUASI</span>
+            <span class="mod-time">⏱ ~30 menit</span>
+          </div>
+          <h2>Soal Latihan & Evaluasi Diri</h2>
+          <p>Kerjakan tanpa melihat jawaban. Lalu klik "Lihat Jawaban" untuk mengecek pemahamanmu.</p>
+
+          <div class="quiz">
+            <h3>🧠 Kuis Tahap 1 <span class="badge">10 SOAL</span></h3>
+
+            <div class="q">
+              <div class="q-num">SOAL 1</div>
+              <div class="q-text">Manakah yang merupakan data <strong>nominal</strong>?</div>
+              <ul class="opts">
+                <li data-correct="false"><span class="opt-letter">A</span>Tingkat kepuasan pelanggan (1–5)</li>
+                <li data-correct="true"><span class="opt-letter">B</span>Kode pos pelanggan</li>
+                <li data-correct="false"><span class="opt-letter">C</span>Jumlah anak per keluarga</li>
+                <li data-correct="false"><span class="opt-letter">D</span>Berat badan mahasiswa</li>
+              </ul>
+              <div class="explanation">Kode pos terlihat angka, tapi sebenarnya kategori tanpa urutan. Tingkat kepuasan = ordinal, jumlah anak = diskrit, berat badan = kontinu.</div>
+            </div>
+
+            <div class="q">
+              <div class="q-num">SOAL 2</div>
+              <div class="q-text">Diketahui data: 12, 15, 18, 20, 22, 25, 100. Berapakah <strong>median</strong>?</div>
+              <ul class="opts">
+                <li data-correct="false"><span class="opt-letter">A</span>20</li>
+                <li data-correct="true"><span class="opt-letter">B</span>20</li>
+                <li data-correct="false"><span class="opt-letter">C</span>30.3</li>
+                <li data-correct="false"><span class="opt-letter">D</span>22</li>
+              </ul>
+              <div class="explanation">Data sudah terurut, n=7 (ganjil), median = nilai ke-(7+1)/2 = ke-4 = 20. Mean (30.3) tertarik naik oleh outlier 100.</div>
+            </div>
+
+            <div class="q">
+              <div class="q-num">SOAL 3</div>
+              <div class="q-text">Dalam distribusi normal, berapa persen data berada di antara μ−σ dan μ+σ?</div>
+              <ul class="opts">
+                <li data-correct="false"><span class="opt-letter">A</span>50%</li>
+                <li data-correct="true"><span class="opt-letter">B</span>68%</li>
+                <li data-correct="false"><span class="opt-letter">C</span>95%</li>
+                <li data-correct="false"><span class="opt-letter">D</span>99.7%</li>
+              </ul>
+              <div class="explanation">Aturan Empiris 68-95-99.7: 68% dalam ±1σ, 95% dalam ±2σ, 99.7% dalam ±3σ.</div>
+            </div>
+
+            <div class="q">
+              <div class="q-num">SOAL 4</div>
+              <div class="q-text">Skor ujian Rina 88, mean kelas 80, σ = 4. Berapa <strong>z-score</strong> Rina?</div>
+              <ul class="opts">
+                <li data-correct="false"><span class="opt-letter">A</span>+0.5</li>
+                <li data-correct="false"><span class="opt-letter">B</span>+1.5</li>
+                <li data-correct="true"><span class="opt-letter">C</span>+2.0</li>
+                <li data-correct="false"><span class="opt-letter">D</span>+8.0</li>
+              </ul>
+              <div class="explanation">Z = (x − μ) / σ = (88 − 80) / 4 = 8/4 = +2.0. Rina berada 2 standar deviasi di atas rata-rata kelas.</div>
+            </div>
+
+            <div class="q">
+              <div class="q-num">SOAL 5</div>
+              <div class="q-text">Sebuah studi menemukan: penjualan es krim & kasus tenggelam naik bersamaan. Kesimpulan yang benar?</div>
+              <ul class="opts">
+                <li data-correct="false"><span class="opt-letter">A</span>Es krim menyebabkan orang tenggelam</li>
+                <li data-correct="true"><span class="opt-letter">B</span>Musim panas (confounder) menyebabkan keduanya naik</li>
+                <li data-correct="false"><span class="opt-letter">C</span>Tidak ada hubungan apa pun</li>
+                <li data-correct="false"><span class="opt-letter">D</span>Orang tenggelam karena makan es krim</li>
+              </ul>
+              <div class="explanation">Ini contoh klasik confounder. Keduanya naik karena musim panas (orang lebih sering berenang & lebih sering makan es krim), bukan karena satu menyebabkan yang lain.</div>
+            </div>
+
+            <div class="q">
+              <div class="q-num">SOAL 6</div>
+              <div class="q-text">Central Limit Theorem menyatakan bahwa...</div>
+              <ul class="opts">
+                <li data-correct="false"><span class="opt-letter">A</span>Mean selalu sama dengan median</li>
+                <li data-correct="true"><span class="opt-letter">B</span>Distribusi rata-rata sampel mendekati normal untuk n besar</li>
+                <li data-correct="false"><span class="opt-letter">C</span>Sampling bias selalu bisa dihindari</li>
+                <li data-correct="false"><span class="opt-letter">D</span>Populasi selalu berdistribusi normal</li>
+              </ul>
+              <div class="explanation">CLT: jika kita mengambil banyak sampel acak dan menghitung rata-ratanya, distribusi rata-rata sampel akan mendekati normal — asalkan ukuran sampel cukup besar (umumnya n ≥ 30).</div>
+            </div>
+
+            <div class="q">
+              <div class="q-num">SOAL 7</div>
+              <div class="q-text">Manakah yang merupakan contoh <strong>survivorship bias</strong>?</div>
+              <ul class="opts">
+                <li data-correct="false"><span class="opt-letter">A</span>Hanya percaya berita yang sependapat dengan kita</li>
+                <li data-correct="true"><span class="opt-letter">B</span>Mempelajari cara sukses dropout tanpa melihat yang gagal</li>
+                <li data-correct="false"><span class="opt-letter">C</span>Mengikuti harga promo awal sebagai acuan</li>
+                <li data-correct="false"><span class="opt-letter">D</span>Hanya ingat peristiwa terbaru</li>
+              </ul>
+              <div class="explanation">Survivorship bias = hanya melihat yang "selamat"/sukses, lupa pada yang gagal. A = confirmation, C = anchoring, D = recency.</div>
+            </div>
+
+            <div class="q">
+              <div class="q-num">SOAL 8</div>
+              <div class="q-text">Sampel convenience (mis. survei online ke teman) — apa masalahnya?</div>
+              <ul class="opts">
+                <li data-correct="false"><span class="opt-letter">A</span>Sampelnya terlalu besar</li>
+                <li data-correct="false"><span class="opt-letter">B</span>Metode ini selalu menghasilkan bias kecil</li>
+                <li data-correct="true"><span class="opt-letter">C</span>Hasilnya tidak bisa digeneralisasi ke populasi yang lebih luas</li>
+                <li data-correct="false"><span class="opt-letter">D</span>Tidak ada masalah, sampeh OK</li>
+              </ul>
+              <div class="explanation">Sampel convenience tidak acak — hanya orang-orang tertentu yang bisa dijangkau. Bias sampel seperti ini sering menghasilkan kesimpulan yang menyesatkan.</div>
+            </div>
+
+            <div class="q">
+              <div class="q-num">SOAL 9</div>
+              <div class="q-text">Diketahui data: 10, 12, 14, 16, 18. Berapa <strong>varians</strong> (populasi)?</div>
+              <ul class="opts">
+                <li data-correct="false"><span class="opt-letter">A</span>4</li>
+                <li data-correct="true"><span class="opt-letter">B</span>8</li>
+                <li data-correct="false"><span class="opt-letter">C</span>2.83</li>
+                <li data-correct="false"><span class="opt-letter">D</span>10</li>
+              </ul>
+              <div class="explanation">Mean = 14. Selisih kuadrat: (−4)²+(−2)²+0²+2²+4² = 16+4+0+4+16 = 40. Varians = 40/5 = 8. (Standar deviasi = √8 ≈ 2.83.)</div>
+            </div>
+
+            <div class="q">
+              <div class="q-num">SOAL 10</div>
+              <div class="q-text">Dua peristiwa A dan B independen jika...</div>
+              <ul class="opts">
+                <li data-correct="false"><span class="opt-letter">A</span>P(A dan B) = P(A) + P(B)</li>
+                <li data-correct="true"><span class="opt-letter">B</span>P(A dan B) = P(A) × P(B)</li>
+                <li data-correct="false"><span class="opt-letter">C</span>P(B | A) = 0</li>
+                <li data-correct="false"><span class="opt-letter">D</span>P(A) = P(B)</li>
+              </ul>
+              <div class="explanation">Independen = terjadinya A tidak mempengaruhi B, sehingga P(B | A) = P(B), dan akibatnya P(A dan B) = P(A) × P(B).</div>
+            </div>
+
+            <button class="reveal-btn" id="revealBtn">👁 Lihat Semua Jawaban</button>
+          </div>
+
+          <div class="callout tip">
+            <strong>Penilaian diri:</strong> 8–10 benar = mantap, lanjut ke Tahap 2! 5–7 benar = ulangi
+            modul yang salah. ≤4 benar = jangan terburu — baca ulang pelan-pelan, latih dengan contoh
+            tambahan dari Khan Academy. Tidak apa-apa belajar lebih lama, yang penting paham.
+          </div>
+        </section>
+
+        <!-- ============ RESOURCES ============ -->
+        <section class="mod" id="resources">
+          <div class="mod-head">
+            <span class="mod-num">REFERENSI</span>
+            <span class="mod-time">📚 Untuk pendalaman</span>
+          </div>
+          <h2>Sumber Belajar Tahap 1</h2>
+          <p>Sumber utama dan pendukung untuk modul ini. Mulai dari Khan Academy (wajib!), lalu video YouTube, dan buku untuk pendalaman.</p>
+
+          <div class="res-list">
+            <div class="res-item">
+              <div class="res-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+              <div>
+                <h4>Khan Academy — Statistik & Probabilitas</h4>
+                <p>Kursus gratis terstruktur: statistik deskriptif, distribusi, sampling. Mulai dari unit "Summarizing quantitative data".</p>
+                <span class="url">khanacademy.org/math/statistics-probability</span>
+              </div>
+            </div>
+            <div class="res-item">
+              <div class="res-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7zM14 5H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z"/></svg></div>
+              <div>
+                <h4>YouTube: StatQuest with Josh Starmer</h4>
+                <p>Penjelasan visual statistik yang jelas & menyenangkan. Mulai dari "Statistics Fundamentals" playlist.</p>
+                <span class="url">youtube.com/@statquest</span>
+              </div>
+            </div>
+            <div class="res-item">
+              <div class="res-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+              <div>
+                <h4>Buku: "Naked Statistics" — Charles Wheelan</h4>
+                <p>Pengantar statistik tanpa rumus menakutkan. Cocok untuk pemula yang ingin intuisi kuat sebelum rumus.</p>
+                <span class="url">Tersedia di Gramedia / Google Books</span>
+              </div>
+            </div>
+            <div class="res-item">
+              <div class="res-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+              <div>
+                <h4>Dataset Latihan: Kaggle</h4>
+                <p>Dataset publik gratis untuk latihan identifikasi tipe data & statistik deskriptif. Mulai dari "Titanic" dan "Housing Prices".</p>
+                <span class="url">kaggle.com/datasets</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout note">
+            <strong>Saran belajar:</strong> Khan Academy sebagai sumber utama (terstruktur, ada latihan).
+            StatQuest untuk visualisasi konsep yang sulit. Naked Statistics untuk intuisi. Kaggle untuk
+            praktik dengan data nyata. Jangan konsumsi semua sekaligus — fokus pada satu per minggu.
+          </div>
+        </section>
+
+        <!-- ============ SECTION NAV ============ -->
+        <div class="section-nav">
+          <a href="roadmap-data-analyst.html" class="snav prev">
+            <div class="snav-lbl">← Kembali ke</div>
+            <div class="snav-title">Roadmap Lengkap</div>
+          </a>
+          <a href="#" class="snav next" id="nextStage">
+            <div class="snav-lbl">Tahap selanjutnya →</div>
+            <div class="snav-title">Tahap 2 · Excel & Spreadsheet (segera)</div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-6"/>
+          </svg>
+        </div>
+        <div>
+          DataPath<span style="opacity:.5">.</span>ID
+          <small>Materi Belajar Data Analyst untuk Mahasiswa Indonesia</small>
+        </div>
+      </div>
+      <p>Edisi 2026 · Tahap 1 Fondasi · Belajar mandiri & gratis</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+  // Smooth scroll offset
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id && id.length > 1) {
+        const el = document.querySelector(id);
+        if (el) {
+          e.preventDefault();
+          const top = el.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }
+    });
+  });
+
+  // TOC active highlight
+  const tocLinks = document.querySelectorAll('#tocList a');
+  const sections = [...tocLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const setActive = () => {
+    let current = sections[0];
+    const scrollY = window.scrollY + 120;
+    for (const s of sections) {
+      if (s.offsetTop <= scrollY) current = s;
+    }
+    tocLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current.id);
+    });
+  };
+  window.addEventListener('scroll', setActive);
+  setActive();
+
+  // Quiz: show/hide answers
+  document.querySelectorAll('.opts li').forEach(li => {
+    li.addEventListener('click', () => {
+      const q = li.closest('.q');
+      q.querySelectorAll('.opts li').forEach(o => o.classList.remove('correct', 'wrong'));
+      if (li.dataset.correct === 'true') {
+        li.classList.add('correct');
+      } else {
+        li.classList.add('wrong');
+        q.querySelector('.opts li[data-correct="true"]')?.classList.add('correct');
+      }
+      q.querySelector('.explanation').classList.add('show');
+    });
+  });
+
+  document.getElementById('revealBtn').addEventListener('click', () => {
+    document.querySelectorAll('.q').forEach(q => {
+      q.querySelectorAll('.opts li[data-correct="true"]').forEach(o => o.classList.add('correct'));
+      q.querySelector('.explanation').classList.add('show');
+    });
+  });
+
+  // Reveal animation
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
