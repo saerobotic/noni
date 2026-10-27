@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Roadmap Belajar Data Analyst dari Nol Sampai Mahir | Mahasiswa Edition</title>
+<meta name="description" content="Silabus lengkap belajar data analyst dari nol sampai profesional. Dirancang khusus untuk mahasiswa yang ingin berkarir di bidang data." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============ RESET & BASE ============ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0b1220;
+    --bg-soft: #111a2e;
+    --surface: #15203a;
+    --surface-2: #1b2945;
+    --line: #253251;
+    --text: #eaf0ff;
+    --text-soft: #a8b5cf;
+    --text-dim: #6f7e9c;
+    --primary: #5b8cff;
+    --primary-2: #7a5cff;
+    --accent: #22d3ee;
+    --accent-2: #34d399;
+    --warning: #fbbf24;
+    --pink: #f472b6;
+    --grad-1: linear-gradient(135deg, #5b8cff 0%, #7a5cff 100%);
+    --grad-2: linear-gradient(135deg, #22d3ee 0%, #34d399 100%);
+    --grad-3: linear-gradient(135deg, #fbbf24 0%, #f472b6 100%);
+    --shadow-sm: 0 4px 14px rgba(0,0,0,.25);
+    --shadow-md: 0 10px 30px rgba(0,0,0,.35);
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Background ambient */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(700px 500px at 10% -5%, rgba(91,140,255,.18), transparent 60%),
+      radial-gradient(600px 500px at 95% 10%, rgba(122,92,255,.15), transparent 60%),
+      radial-gradient(800px 600px at 50% 100%, rgba(34,211,238,.10), transparent 60%);
+    pointer-events: none;
+    z-index: -1;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  ::selection { background: rgba(91,140,255,.4); color: #fff; }
+
+  /* ============ LAYOUT ============ */
+  .container { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 96px 0; position: relative; }
+  @media (max-width: 720px) { section { padding: 64px 0; } }
+
+  /* ============ TYPOGRAPHY ============ */
+  h1, h2, h3, h4 { line-height: 1.2; letter-spacing: -0.02em; font-weight: 800; }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 6px 14px;
+    border: 1px solid rgba(34,211,238,.3);
+    border-radius: 999px;
+    background: rgba(34,211,238,.06);
+  }
+  .eyebrow::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 12px var(--accent);
+  }
+  .section-title {
+    font-size: clamp(28px, 4vw, 42px);
+    margin: 16px 0 12px;
+    background: linear-gradient(180deg, #fff 0%, #b8c5e6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .section-sub {
+    color: var(--text-soft);
+    max-width: 720px;
+    font-size: 16px;
+  }
+  .section-head { margin-bottom: 56px; }
+
+  /* ============ NAVBAR ============ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: rgba(11,18,32,.7);
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    transition: all .3s ease;
+  }
+  nav.scrolled { background: rgba(11,18,32,.92); border-bottom-color: rgba(255,255,255,.08); }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px;
+    max-width: 1180px; margin: 0 auto;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 17px; }
+  .brand-logo {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: var(--grad-1);
+    display: grid; place-items: center;
+    box-shadow: 0 6px 20px rgba(91,140,255,.4);
+    position: relative;
+  }
+  .brand-logo svg { width: 22px; height: 22px; }
+  .brand-logo::after {
+    content: ""; position: absolute; inset: 0; border-radius: 10px;
+    background: linear-gradient(135deg, rgba(255,255,255,.25), transparent 50%);
+  }
+  .brand small { display: block; font-size: 11px; font-weight: 500; color: var(--text-dim); letter-spacing: .04em; }
+  .nav-links { display: flex; gap: 8px; align-items: center; }
+  .nav-links a {
+    padding: 8px 14px; border-radius: 8px; font-size: 14px; font-weight: 500;
+    color: var(--text-soft); transition: all .2s ease;
+  }
+  .nav-links a:hover { color: var(--text); background: rgba(255,255,255,.06); }
+  .nav-cta {
+    padding: 10px 18px !important; border-radius: 10px;
+    background: var(--grad-1); color: #fff !important; font-weight: 600;
+    box-shadow: 0 6px 18px rgba(91,140,255,.35);
+  }
+  .nav-cta:hover { transform: translateY(-1px); background: var(--grad-1) !important; }
+  .nav-toggle { display: none; background: none; border: 0; color: var(--text); cursor: pointer; padding: 8px; }
+  .nav-toggle svg { width: 24px; height: 24px; }
+  @media (max-width: 880px) {
+    .nav-links { position: fixed; inset: 64px 0 auto 0; flex-direction: column;
+      background: rgba(11,18,32,.98); padding: 16px; gap: 4px;
+      border-bottom: 1px solid var(--line); transform: translateY(-120%);
+      transition: transform .3s ease; }
+    .nav-links.open { transform: translateY(0); }
+    .nav-links a { width: 100%; padding: 14px 16px; }
+    .nav-toggle { display: block; }
+  }
+
+  /* ============ HERO ============ */
+  .hero { padding: 140px 0 80px; }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center;
+  }
+  @media (max-width: 920px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .hero h1 {
+    font-size: clamp(34px, 5.2vw, 60px);
+    line-height: 1.05;
+    margin: 20px 0 22px;
+  }
+  .hero h1 .grad {
+    background: linear-gradient(120deg, #5b8cff 0%, #22d3ee 40%, #34d399 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero p.lead {
+    font-size: 18px; color: var(--text-soft);
+    max-width: 560px; margin-bottom: 32px;
+  }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 26px; border-radius: 12px; font-weight: 600;
+    font-size: 15px; cursor: pointer; border: 0;
+    transition: all .25s ease;
+  }
+  .btn-primary {
+    background: var(--grad-1); color: #fff;
+    box-shadow: 0 10px 28px rgba(91,140,255,.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(91,140,255,.45); }
+  .btn-ghost {
+    background: rgba(255,255,255,.04); color: var(--text);
+    border: 1px solid var(--line);
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,.08); border-color: var(--primary); }
+  .btn svg { width: 18px; height: 18px; }
+
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 44px;
+    padding-top: 28px; border-top: 1px solid var(--line);
+  }
+  .stat-num {
+    font-size: 26px; font-weight: 800; letter-spacing: -.02em;
+    background: var(--grad-2); -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .stat-label { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+
+  /* Hero card visual */
+  .hero-card {
+    position: relative;
+    background: linear-gradient(180deg, var(--surface) 0%, var(--bg-soft) 100%);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 26px;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+  }
+  .hero-card::before {
+    content: ""; position: absolute; top: -50%; right: -30%;
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, rgba(91,140,255,.25), transparent 60%);
+    pointer-events: none;
+  }
+  .hero-card h4 {
+    font-size: 14px; color: var(--text-soft); margin-bottom: 18px;
+    display: flex; align-items: center; gap: 8px; font-weight: 600;
+  }
+  .dot-live { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-2);
+    box-shadow: 0 0 10px var(--accent-2); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+  .mini-chart {
+    display: flex; align-items: flex-end; gap: 8px; height: 140px;
+    margin-bottom: 18px; padding: 12px;
+    background: rgba(0,0,0,.2); border-radius: 12px;
+  }
+  .bar { flex: 1; border-radius: 6px 6px 0 0; background: var(--grad-1);
+    animation: barRise 1.4s cubic-bezier(.16,1,.3,1) backwards; }
+  .bar:nth-child(1) { --h: 40%; animation-delay: .1s; }
+  .bar:nth-child(2) { --h: 65%; animation-delay: .2s; background: var(--grad-2); }
+  .bar:nth-child(3) { --h: 50%; animation-delay: .3s; }
+  .bar:nth-child(4) { --h: 80%; animation-delay: .4s; background: var(--grad-2); }
+  .bar:nth-child(5) { --h: 70%; animation-delay: .5s; }
+  .bar:nth-child(6) { --h: 95%; animation-delay: .6s; background: var(--grad-2); }
+  .bar:nth-child(7) { --h: 60%; animation-delay: .7s; }
+  @keyframes barRise { from { height: 0; } to { height: var(--h); } }
+  .bar { height: var(--h); }
+  .card-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  .metric {
+    padding: 14px; border-radius: 10px; background: rgba(255,255,255,.03);
+    border: 1px solid var(--line);
+  }
+  .metric-val { font-size: 18px; font-weight: 700; }
+  .metric-lbl { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+  .metric.up { color: var(--accent-2); }
+  .metric.up .metric-lbl { color: var(--accent-2); opacity: .7; }
+
+  /* ============ WHY SECTION ============ */
+  .why-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  }
+  @media (max-width: 920px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .why-grid { grid-template-columns: 1fr; } }
+  .why-card {
+    padding: 26px; border-radius: var(--radius);
+    background: linear-gradient(180deg, var(--surface) 0%, var(--bg-soft) 100%);
+    border: 1px solid var(--line);
+    transition: all .3s ease;
+    position: relative; overflow: hidden;
+  }
+  .why-card:hover { transform: translateY(-4px); border-color: rgba(91,140,255,.5); box-shadow: var(--shadow-md); }
+  .why-icon {
+    width: 44px; height: 44px; border-radius: 12px; margin-bottom: 16px;
+    display: grid; place-items: center;
+    background: rgba(91,140,255,.12); color: var(--primary);
+  }
+  .why-icon svg { width: 22px; height: 22px; }
+  .why-card:nth-child(2) .why-icon { background: rgba(34,211,238,.12); color: var(--accent); }
+  .why-card:nth-child(3) .why-icon { background: rgba(52,211,153,.12); color: var(--accent-2); }
+  .why-card:nth-child(4) .why-icon { background: rgba(244,114,182,.12); color: var(--pink); }
+  .why-card h3 { font-size: 17px; margin-bottom: 8px; }
+  .why-card p { font-size: 14px; color: var(--text-soft); line-height: 1.6; }
+
+  /* ============ ROADMAP TIMELINE ============ */
+  .roadmap-wrap { position: relative; }
+  .roadmap-line {
+    position: absolute; left: 50%; top: 0; bottom: 0; width: 2px;
+    background: linear-gradient(180deg, var(--primary), var(--accent), var(--accent-2), var(--pink));
+    transform: translateX(-50%);
+    opacity: .3;
+  }
+  @media (max-width: 880px) {
+    .roadmap-line { left: 28px; }
+  }
+  .stage {
+    display: grid; grid-template-columns: 1fr 80px 1fr; gap: 0;
+    margin-bottom: 40px; align-items: center;
+  }
+  .stage:nth-child(even) .stage-content { grid-column: 3; text-align: left; }
+  .stage:nth-child(odd) .stage-content { grid-column: 1; text-align: right; }
+  @media (max-width: 880px) {
+    .stage { grid-template-columns: 56px 1fr; gap: 16px; }
+    .stage:nth-child(even) .stage-content,
+    .stage:nth-child(odd) .stage-content { grid-column: 2; text-align: left; }
+  }
+  .stage-marker {
+    grid-column: 2; display: flex; flex-direction: column; align-items: center;
+    z-index: 2;
+  }
+  @media (max-width: 880px) { .stage-marker { grid-column: 1; } }
+  .stage-dot {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--primary);
+    display: grid; place-items: center; font-weight: 800; font-size: 18px;
+    color: var(--primary); position: relative;
+    box-shadow: 0 0 0 6px rgba(91,140,255,.08);
+  }
+  .stage:nth-child(2) .stage-dot { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 0 6px rgba(34,211,238,.08); }
+  .stage:nth-child(3) .stage-dot { border-color: var(--accent-2); color: var(--accent-2); box-shadow: 0 0 0 6px rgba(52,211,153,.08); }
+  .stage:nth-child(4) .stage-dot { border-color: var(--warning); color: var(--warning); box-shadow: 0 0 0 6px rgba(251,191,36,.08); }
+  .stage:nth-child(5) .stage-dot { border-color: var(--pink); color: var(--pink); box-shadow: 0 0 0 6px rgba(244,114,182,.08); }
+  .stage:nth-child(6) .stage-dot { border-color: var(--primary-2); color: var(--primary-2); box-shadow: 0 0 0 6px rgba(122,92,255,.08); }
+  .stage-content {
+    background: linear-gradient(180deg, var(--surface) 0%, var(--bg-soft) 100%);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px;
+    transition: all .3s ease;
+  }
+  .stage-content:hover { transform: translateY(-3px); border-color: rgba(91,140,255,.4); box-shadow: var(--shadow-md); }
+  .stage-tag {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; padding: 4px 10px; border-radius: 6px;
+    background: rgba(91,140,255,.12); color: var(--primary); margin-bottom: 10px;
+  }
+  .stage:nth-child(2) .stage-tag { background: rgba(34,211,238,.12); color: var(--accent); }
+  .stage:nth-child(3) .stage-tag { background: rgba(52,211,153,.12); color: var(--accent-2); }
+  .stage:nth-child(4) .stage-tag { background: rgba(251,191,36,.12); color: var(--warning); }
+  .stage:nth-child(5) .stage-tag { background: rgba(244,114,182,.12); color: var(--pink); }
+  .stage:nth-child(6) .stage-tag { background: rgba(122,92,255,.12); color: var(--primary-2); }
+  .stage h3 { font-size: 20px; margin-bottom: 6px; }
+  .stage .dur { font-size: 13px; color: var(--text-dim); margin-bottom: 14px; }
+  .stage ul { list-style: none; padding: 0; margin: 0 0 14px; }
+  .stage ul li {
+    padding: 6px 0; font-size: 14px; color: var(--text-soft);
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+  .stage:nth-child(even) .stage-content ul li { flex-direction: row-reverse; }
+  @media (max-width: 880px) {
+    .stage:nth-child(even) .stage-content ul li { flex-direction: row; }
+  }
+  .stage ul li svg { width: 16px; height: 16px; color: var(--accent-2); flex-shrink: 0; margin-top: 4px; }
+  .stage-tools {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    padding-top: 14px; border-top: 1px solid var(--line);
+  }
+  .stage:nth-child(even) .stage-tools { justify-content: flex-end; }
+  @media (max-width: 880px) {
+    .stage:nth-child(even) .stage-tools { justify-content: flex-start; }
+  }
+  .tool-chip {
+    font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px;
+    background: rgba(255,255,255,.04); border: 1px solid var(--line); color: var(--text-soft);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ============ MODULES GRID ============ */
+  .modules-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  @media (max-width: 920px) { .modules-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .modules-grid { grid-template-columns: 1fr; } }
+  .module-card {
+    background: linear-gradient(180deg, var(--surface) 0%, var(--bg-soft) 100%);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: all .3s ease;
+  }
+  .module-card:hover { transform: translateY(-4px); border-color: rgba(91,140,255,.5); box-shadow: var(--shadow-md); }
+  .module-card::after {
+    content: ""; position: absolute; top: 0; right: 0;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle at top right, rgba(91,140,255,.15), transparent 70%);
+    pointer-events: none;
+  }
+  .module-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; color: var(--text-dim); margin-bottom: 8px;
+  }
+  .module-card h3 { font-size: 19px; margin-bottom: 6px; }
+  .module-card .level {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    padding: 3px 8px; border-radius: 5px; margin-bottom: 14px;
+    background: rgba(52,211,153,.12); color: var(--accent-2);
+  }
+  .module-card .level.intermediate { background: rgba(251,191,36,.12); color: var(--warning); }
+  .module-card .level.advanced { background: rgba(244,114,182,.12); color: var(--pink); }
+  .module-card ul { list-style: none; padding: 0; margin: 0; }
+  .module-card ul li {
+    padding: 6px 0; font-size: 14px; color: var(--text-soft);
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .module-card ul li::before {
+    content: "▸"; color: var(--primary); font-weight: 700; flex-shrink: 0;
+  }
+  .module-card .out {
+    margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line);
+    font-size: 13px; color: var(--text-dim);
+  }
+  .module-card .out strong { color: var(--text); font-weight: 600; }
+
+  /* ============ RESOURCES ============ */
+  .res-tabs {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px;
+  }
+  .res-tab {
+    padding: 10px 18px; border-radius: 10px; font-size: 14px; font-weight: 600;
+    background: rgba(255,255,255,.03); border: 1px solid var(--line);
+    color: var(--text-soft); cursor: pointer; transition: all .2s;
+  }
+  .res-tab.active { background: var(--grad-1); color: #fff; border-color: transparent; }
+  .res-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  }
+  @media (max-width: 920px) { .res-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .res-grid { grid-template-columns: 1fr; } }
+  .res-card {
+    padding: 20px; border-radius: var(--radius);
+    background: var(--surface); border: 1px solid var(--line);
+    transition: all .25s; cursor: pointer;
+  }
+  .res-card:hover { border-color: rgba(91,140,255,.5); transform: translateY(-2px); }
+  .res-type {
+    font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 10px;
+  }
+  .res-card h4 { font-size: 16px; margin-bottom: 6px; }
+  .res-card p { font-size: 13px; color: var(--text-dim); }
+  .res-card .res-platform {
+    margin-top: 12px; font-size: 12px; color: var(--text-soft); font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ============ PROJECTS ============ */
+  .projects {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  @media (max-width: 920px) { .projects { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .projects { grid-template-columns: 1fr; } }
+  .proj-card {
+    padding: 24px; border-radius: var(--radius);
+    background: linear-gradient(180deg, var(--surface) 0%, var(--bg-soft) 100%);
+    border: 1px solid var(--line); position: relative;
+    transition: all .3s;
+  }
+  .proj-card:hover { transform: translateY(-3px); border-color: rgba(34,211,238,.4); }
+  .proj-num {
+    position: absolute; top: 18px; right: 22px;
+    font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--text-dim);
+  }
+  .proj-icon {
+    width: 42px; height: 42px; border-radius: 10px; margin-bottom: 14px;
+    display: grid; place-items: center; background: rgba(34,211,238,.12); color: var(--accent);
+  }
+  .proj-icon svg { width: 20px; height: 20px; }
+  .proj-card h4 { font-size: 17px; margin-bottom: 8px; }
+  .proj-card p { font-size: 14px; color: var(--text-soft); margin-bottom: 14px; }
+  .proj-skills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .proj-skills span {
+    font-size: 11px; padding: 4px 9px; border-radius: 6px;
+    background: rgba(91,140,255,.1); color: var(--primary); font-weight: 600;
+  }
+
+  /* ============ TIPS SECTION ============ */
+  .tips {
+    background: linear-gradient(135deg, rgba(91,140,255,.06), rgba(34,211,238,.04));
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 48px;
+  }
+  @media (max-width: 720px) { .tips { padding: 28px; } }
+  .tips-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 28px; }
+  @media (max-width: 720px) { .tips-grid { grid-template-columns: 1fr; } }
+  .tip {
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .tip-num {
+    width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
+    display: grid; place-items: center; font-weight: 800; font-size: 15px;
+    background: var(--grad-1); color: #fff;
+  }
+  .tip:nth-child(2) .tip-num { background: var(--grad-2); }
+  .tip:nth-child(3) .tip-num { background: var(--grad-3); }
+  .tip:nth-child(4) .tip-num { background: linear-gradient(135deg, #7a5cff, #f472b6); }
+  .tip h4 { font-size: 16px; margin-bottom: 4px; }
+  .tip p { font-size: 14px; color: var(--text-soft); }
+
+  /* ============ CTA BANNER ============ */
+  .cta-banner {
+    background: linear-gradient(135deg, #1a2c52 0%, #2d1b54 100%);
+    border: 1px solid rgba(91,140,255,.3);
+    border-radius: 24px;
+    padding: 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-banner::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(600px 300px at 50% 0%, rgba(91,140,255,.25), transparent 60%);
+  }
+  .cta-banner > * { position: relative; z-index: 1; }
+  .cta-banner h2 {
+    font-size: clamp(26px, 4vw, 36px); margin-bottom: 14px;
+    background: linear-gradient(180deg, #fff, #c8d4f0);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .cta-banner p { color: var(--text-soft); max-width: 580px; margin: 0 auto 28px; font-size: 16px; }
+
+  /* ============ FOOTER ============ */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 48px 0 32px;
+    background: var(--bg-soft);
+  }
+  .footer-inner {
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+  }
+  .footer-inner p { font-size: 14px; color: var(--text-dim); }
+  .footer-links { display: flex; gap: 18px; font-size: 14px; }
+  .footer-links a { color: var(--text-soft); transition: color .2s; }
+  .footer-links a:hover { color: var(--primary); }
+
+  /* ============ SCROLL REVEAL ============ */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s cubic-bezier(.16,1,.3,1); }
+  .reveal.in { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- ============ NAVBAR ============ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <div class="brand-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-6"/>
+        </svg>
+      </div>
+      <div>
+        DataPath<span style="opacity:.5;">.</span>ID
+        <small>Roadmap Belajar Data Analyst</small>
+      </div>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#why">Mengapa</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#modules">Modul</a>
+      <a href="#resources">Sumber Belajar</a>
+      <a href="#projects">Proyek</a>
+      <a href="#tips">Tips</a>
+      <a href="#start" class="nav-cta">Mulai Belajar</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="reveal">
+        <span class="eyebrow">Silabus Lengkap · Edisi Mahasiswa</span>
+        <h1>Belajar Data Analyst<br>dari <span class="grad">Nol sampai Mahir</span></h1>
+        <p class="lead">
+          Roadmap terstruktur selama 6 bulan untuk mengubah kamu dari pemula menjadi data analyst
+          siap kerja. Dirancang khusus untuk mahasiswa dengan konteks akademik, proyek portofolio,
+          dan keterampilan yang dicari industri.
+        </p>
+        <div class="hero-cta">
+          <a href="#roadmap" class="btn btn-primary">
+            Lihat Roadmap
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#resources" class="btn btn-ghost">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            Sumber Gratis
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-num">6 Bulan</div>
+            <div class="stat-label">Estimasi Durasi</div>
+          </div>
+          <div>
+            <div class="stat-num">6 Tahap</div>
+            <div class="stat-label">Tingkat Pembelajaran</div>
+          </div>
+          <div>
+            <div class="stat-num">8+ Proyek</div>
+            <div class="stat-label">Portofolio Akhir</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-card reveal">
+        <h4><span class="dot-live"></span> Dashboard Analitik Penjualan</h4>
+        <div class="mini-chart">
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </div>
+        <div class="card-metrics">
+          <div class="metric up">
+            <div class="metric-val">+24%</div>
+            <div class="metric-lbl">Pendapatan</div>
+          </div>
+          <div class="metric up">
+            <div class="metric-val">1.8K</div>
+            <div class="metric-lbl">Transaksi</div>
+          </div>
+          <div class="metric">
+            <div class="metric-val">4.6★</div>
+            <div class="metric-lbl">Rating</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ WHY ============ -->
+<section id="why">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Mengapa Data Analyst?</span>
+      <h2 class="section-title">Profesi Masa Depan yang Relevan untukmu</h2>
+      <p class="section-sub">
+        Data analyst menjadi salah satu karir dengan permintaan tertinggi di era digital.
+        Sebagai mahasiswa, keterampilan ini melengkapi jurusan apa pun — dari ekonomi, teknik,
+        sosial, hingga kesehatan.
+      </p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
+        </div>
+        <h3>Permintaan Tinggi</h3>
+        <p>Setiap industri butuh data analyst — dari startup, BUMN, e-commerce, sampai lembaga riset. Lowongan terus tumbuh 25% per tahun.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3>Gaji Kompetitif</h3>
+        <p>Junior data analyst di Indonesia berkisar Rp 6–12 juta/bulan. Senior bisa menembus Rp 25–50 juta, lebih tinggi di luar negeri.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h3>Skil Banyak Bidang</h3>
+        <p>Berguna untuk skripsi, riset, internship, magang, dan kerja part-time. Skill yang kamu pelajari bisa langsung dipakai di kelas.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11H1l8-8 8 8h-8v10"/></svg>
+        </div>
+        <h3>Jenjang Karier Jelas</h3>
+        <p>Naik ke data scientist, data engineer, business analyst, atau product analyst. Belum tahu jurusan? Ini aman untuk transisi karier.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROADMAP TIMELINE ============ -->
+<section id="roadmap">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Roadmap Perjalanan</span>
+      <h2 class="section-title">6 Tahap Belajar Terstruktur</h2>
+      <p class="section-sub">
+        Setiap tahap dirancang bertahap — dari konsep dasar, tools, pemrograman, visualisasi,
+        sampai siap kerja. Ikuti berurutan untuk hasil terbaik, atau lompat jika sudah punya dasar.
+      </p>
+    </div>
+
+    <div class="roadmap-wrap">
+      <div class="roadmap-line"></div>
+
+      <!-- Stage 1 -->
+      <div class="stage reveal">
+        <div class="stage-content">
+          <span class="stage-tag">Tahap 1 · Fondasi</span>
+          <h3>Statistik & Logika Data Dasar</h3>
+          <div class="dur">⏱ 2–3 minggu · Tingkat: Pemula</div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Statistik deskriptif: mean, median, modus, standar deviasi</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Probabilitas, distribusi normal & sampling</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Tipe data, variabel, dan cara membaca data</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Logika berpikir analitis & critical thinking</li>
+          </ul>
+          <div class="stage-tools">
+            <span class="tool-chip">Khan Academy</span>
+            <span class="tool-chip">Statistik Dasar</span>
+          </div>
+        </div>
+        <div class="stage-marker"><div class="stage-dot">01</div></div>
+        <div></div>
+      </div>
+
+      <!-- Stage 2 -->
+      <div class="stage reveal">
+        <div></div>
+        <div class="stage-marker"><div class="stage-dot">02</div></div>
+        <div class="stage-content">
+          <span class="stage-tag">Tahap 2 · Tools</span>
+          <h3>Excel & Spreadsheet Tingkat Lanjut</h3>
+          <div class="dur">⏱ 2–3 minggu · Tingkat: Pemula</div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Formula: VLOOKUP, INDEX-MATCH, SUMIFS, COUNTIFS</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Pivot table, conditional formatting, data validation</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Cleaning data: remove duplicates, text-to-column</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Dashboard sederhana dengan chart Excel</li>
+          </ul>
+          <div class="stage-tools">
+            <span class="tool-chip">MS Excel</span>
+            <span class="tool-chip">Google Sheets</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 3 -->
+      <div class="stage reveal">
+        <div class="stage-content">
+          <span class="stage-tag">Tahap 3 · Database</span>
+          <h3>SQL & Manajemen Database</h3>
+          <div class="dur">⏱ 3–4 minggu · Tingkat: Menengah</div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Query dasar: SELECT, WHERE, ORDER BY, LIMIT</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> JOIN (INNER, LEFT, RIGHT), GROUP BY & HAVING</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Fungsi agregat, subquery, dan CTE</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Window functions & performance tuning dasar</li>
+          </ul>
+          <div class="stage-tools">
+            <span class="tool-chip">MySQL</span>
+            <span class="tool-chip">PostgreSQL</span>
+            <span class="tool-chip">SQLite</span>
+          </div>
+        </div>
+        <div class="stage-marker"><div class="stage-dot">03</div></div>
+        <div></div>
+      </div>
+
+      <!-- Stage 4 -->
+      <div class="stage reveal">
+        <div></div>
+        <div class="stage-marker"><div class="stage-dot">04</div></div>
+        <div class="stage-content">
+          <span class="stage-tag">Tahap 4 · Programming</span>
+          <h3>Python untuk Data Analysis</h3>
+          <div class="dur">⏱ 5–6 minggu · Tingkat: Menengah</div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Sintaks Python: variabel, loop, function, kondisi</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Pandas: DataFrame, indexing, filtering, grouping</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> NumPy: operasi array & komputasi numerik</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Data cleaning: handling missing, outliers, transformasi</li>
+          </ul>
+          <div class="stage-tools">
+            <span class="tool-chip">Python 3</span>
+            <span class="tool-chip">Pandas</span>
+            <span class="tool-chip">NumPy</span>
+            <span class="tool-chip">Jupyter</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 5 -->
+      <div class="stage reveal">
+        <div class="stage-content">
+          <span class="stage-tag">Tahap 5 · Visualisasi</span>
+          <h3>Data Visualization & Storytelling</h3>
+          <div class="dur">⏱ 3–4 minggu · Tingkat: Menengah</div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Prinsip visualisasi: tipe chart, palette, ergonomi</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Matplotlib & Seaborn untuk chart analitik</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Power BI atau Tableau untuk dashboard interaktif</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Storytelling dengan data: menjual insight ke stakeholder</li>
+          </ul>
+          <div class="stage-tools">
+            <span class="tool-chip">Matplotlib</span>
+            <span class="tool-chip">Seaborn</span>
+            <span class="tool-chip">Power BI</span>
+            <span class="tool-chip">Tableau Public</span>
+          </div>
+        </div>
+        <div class="stage-marker"><div class="stage-dot">05</div></div>
+        <div></div>
+      </div>
+
+      <!-- Stage 6 -->
+      <div class="stage reveal">
+        <div></div>
+        <div class="stage-marker"><div class="stage-dot">06</div></div>
+        <div class="stage-content">
+          <span class="stage-tag">Tahap 6 · Siap Kerja</span>
+          <h3>Machine Learning Dasar & Portofolio</h3>
+          <div class="dur">⏱ 4–6 minggu · Tingkat: Lanjutan</div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Regresi linear & logistic, evaluasi model (RMSE, F1)</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> K-Means clustering & segmentasi pelanggan</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> A/B testing & eksperimen produk</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Membangun portofolio, CV, dan persiapan interview</li>
+          </ul>
+          <div class="stage-tools">
+            <span class="tool-chip">Scikit-learn</span>
+            <span class="tool-chip">Kaggle</span>
+            <span class="tool-chip">GitHub</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ MODULES DETAIL ============ -->
+<section id="modules">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Modul Pembelajaran</span>
+      <h2 class="section-title">Apa yang Akan Kamu Kuasai</h2>
+      <p class="section-sub">
+        Rincian kompetensi yang harus dikuasai di setiap tahap. Setiap modul dilengkapi
+        target belajar dan output nyata yang bisa kamu tunjukkan.
+      </p>
+    </div>
+
+    <div class="modules-grid">
+      <div class="module-card reveal">
+        <div class="module-num">M01</div>
+        <span class="level">Pemula</span>
+        <h3>Statistik & Probabilitas</h3>
+        <ul>
+          <li>Mean, median, modus, varian, standar deviasi</li>
+          <li>Distribusi data: normal, binomial, Poisson</li>
+          <li>Hipotesis testing: p-value, t-test, chi-square</li>
+          <li>Korelasi & regresi sederhana</li>
+        </ul>
+        <div class="out"><strong>Output:</strong> Mampu menganalisis dataset sederhana dan menjelaskan insight-nya.</div>
+      </div>
+
+      <div class="module-card reveal">
+        <div class="module-num">M02</div>
+        <span class="level">Pemula</span>
+        <h3>Spreadsheet Mastery</h3>
+        <ul>
+          <li>Formula lanjutan & array formula</li>
+          <li>Pivot table untuk analisis multidimensi</li>
+          <li>Data cleaning & transformasi cepat</li>
+          <li>Membuat dashboard Excel interaktif</li>
+        </ul>
+        <div class="out"><strong>Output:</strong> Dashboard penjualan atau keuangan dalam satu file Excel.</div>
+      </div>
+
+      <div class="module-card reveal">
+        <div class="module-num">M03</div>
+        <span class="level intermediate">Menengah</span>
+        <h3>SQL & Database</h3>
+        <ul>
+          <li>DDL & DML: CREATE, INSERT, UPDATE</li>
+          <li>Query kompleks dengan JOIN & subquery</li>
+          <li>Agregasi & window functions</li>
+          <li>Optimasi query dasar</li>
+        </ul>
+        <div class="out"><strong>Output:</strong> Mampu menjawab soal analitik bisnis dengan SQL.</div>
+      </div>
+
+      <div class="module-card reveal">
+        <div class="module-num">M04</div>
+        <span class="level intermediate">Menengah</span>
+        <h3>Python & Pandas</h3>
+        <ul>
+          <li>Fondasi Python: tipe data, control flow, function</li>
+          <li>Pandas: DataFrame, merge, groupby, transform</li>
+          <li>NumPy & operasi vektorisasi</li>
+          <li>Cleaning, reshape, dan analisis eksploratif (EDA)</li>
+        </ul>
+        <div class="out"><strong>Output:</strong> Notebook Jupyter dengan EDA lengkap dari dataset publik.</div>
+      </div>
+
+      <div class="module-card reveal">
+        <div class="module-num">M05</div>
+        <span class="level intermediate">Menengah</span>
+        <h3>Visualisasi Data</h3>
+        <ul>
+          <li>Prinsip desain visualisasi yang efektif</li>
+          <li>Matplotlib & Seaborn untuk analisis</li>
+          <li>Power BI atau Tableau untuk dashboard</li>
+          <li>Storytelling: dari data ke keputusan</li>
+        </ul>
+        <div class="out"><strong>Output:</strong> Dashboard interaktif yang bisa dipresentasikan ke stakeholder.</div>
+      </div>
+
+      <div class="module-card reveal">
+        <div class="module-num">M06</div>
+        <span class="level advanced">Lanjutan</span>
+        <h3>Machine Learning Dasar</h3>
+        <ul>
+          <li>Supervised: regresi & klasifikasi</li>
+          <li>Unsupervised: clustering K-Means</li>
+          <li>Evaluasi model: accuracy, precision, recall</li>
+          <li>Pipelining dengan Scikit-learn</li>
+        </ul>
+        <div class="out"><strong>Output:</strong> Model prediktif sederhana + laporan hasil analisis.</div>
+      </div>
+
+      <div class="module-card reveal">
+        <div class="module-num">M07</div>
+        <span class="level advanced">Lanjutan</span>
+        <h3>A/B Testing & Eksperimen</h3>
+        <ul>
+          <li>Desain eksperimen & sample size</li>
+          <li>Statistical significance</li>
+          <li>Interpretasi hasil & rekomendasi</li>
+          <li>Bias & confounding variables</li>
+        </ul>
+        <div class="out"><strong>Output:</strong> Laporan A/B test dengan rekomendasi keputusan produk.</div>
+      </div>
+
+      <div class="module-card reveal">
+        <div class="module-num">M08</div>
+        <span class="level advanced">Lanjutan</span>
+        <h3>Soft Skills & Komunikasi</h3>
+        <ul>
+          <li>Presentasi insight ke non-teknis</li>
+          <li>Domain knowledge: bisnis, marketing, operasi</li>
+          <li>Dokumentasi & reproducibility</li>
+          <li>Kolaborasi tim & manajemen stakeholder</li>
+        </ul>
+        <div class="out"><strong>Output:</strong> Deck presentasi & dokumentasi proyek di GitHub.</div>
+      </div>
+
+      <div class="module-card reveal">
+        <div class="module-num">M09</div>
+        <span class="level advanced">Lanjutan</span>
+        <h3>Portofolio & Karier</h3>
+        <ul>
+          <li>Membangun 3 proyek end-to-end</li>
+          <li>CV khusus data analyst</li>
+          <li>Persiapan interview teknis & case study</li>
+          <li>Networking di LinkedIn & komunitas</li>
+        </ul>
+        <div class="out"><strong>Output:</strong> Portofolio online siap dikirim ke recruiter.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESOURCES ============ -->
+<section id="resources">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Sumber Belajar</span>
+      <h2 class="section-title">Referensi Gratis & Berbayar Terbaik</h2>
+      <p class="section-sub">
+        Kumpulan sumber belajar terkurasi. Sebagian besar gratis, beberapa berbayar tapi sepadan.
+        Pilih yang sesuai gaya belajarmu — video, buku, atau platform interaktif.
+      </p>
+    </div>
+
+    <div class="res-tabs reveal">
+      <button class="res-tab active" data-cat="all">Semua</button>
+      <button class="res-tab" data-cat="video">Video Course</button>
+      <button class="res-tab" data-cat="interactive">Interaktif</button>
+      <button class="res-tab" data-cat="book">Buku</button>
+      <button class="res-tab" data-cat="youtube">YouTube</button>
+    </div>
+
+    <div class="res-grid reveal" id="resGrid">
+      <a class="res-card" data-cat="interactive" href="https://www.datacamp.com" target="_blank" rel="noopener">
+        <div class="res-type">Interaktif</div>
+        <h4>DataCamp</h4>
+        <p>Belajar Python, SQL, R langsung di browser dengan feedback real-time.</p>
+        <div class="res-platform">datacamp.com</div>
+      </a>
+      <a class="res-card" data-cat="video" href="https://www.coursera.org/professional-certificates/google-data-analytics" target="_blank" rel="noopener">
+        <div class="res-type">Video Course</div>
+        <h4>Google Data Analytics</h4>
+        <p>Sertifikasi profesional dari Google. 8 kursus, cocok pemula total.</p>
+        <div class="res-platform">coursera.org</div>
+      </a>
+      <a class="res-card" data-cat="interactive" href="https://www.kaggle.com/learn" target="_blank" rel="noopener">
+        <div class="res-type">Interaktif</div>
+        <h4>Kaggle Learn</h4>
+        <p>Modul singkat & gratis: Python, SQL, ML, visualisasi. Praktis dan langsung.</p>
+        <div class="res-platform">kaggle.com/learn</div>
+      </a>
+      <a class="res-card" data-cat="youtube" href="https://www.youtube.com/@FreeCodeCamp" target="_blank" rel="noopener">
+        <div class="res-type">YouTube</div>
+        <h4>freeCodeCamp</h4>
+        <p>Course panjang gratis: Data Analysis with Python, SQL, Pandas, dan banyak lagi.</p>
+        <div class="res-platform">youtube.com</div>
+      </a>
+      <a class="res-card" data-cat="book" href="https://www.oreilly.com/library/view/python-for-data/9781491957653/" target="_blank" rel="noopener">
+        <div class="res-type">Buku</div>
+        <h4>Python for Data Analysis</h4>
+        <p>Buku wajib oleh Wes McKinney, pencipta Pandas. Referensi utama komunitas data.</p>
+        <div class="res-platform">O'Reilly Media</div>
+      </a>
+      <a class="res-card" data-cat="book" href="https://www.storytellingwithdata.com/books" target="_blank" rel="noopener">
+        <div class="res-type">Buku</div>
+        <h4>Storytelling with Data</h4>
+        <p>Cole Nussbaumer. Pelajari cara menyampaikan insight yang menggerakkan keputusan.</p>
+        <div class="res-platform">storytellingwithdata.com</div>
+      </a>
+      <a class="res-card" data-cat="interactive" href="https://mode.com/sql-tutorial" target="_blank" rel="noopener">
+        <div class="res-type">Interaktif</div>
+        <h4>Mode SQL Tutorial</h4>
+        <p>Tutorial SQL gratis dari dasar sampai advanced, dengan latihan di browser.</p>
+        <div class="res-platform">mode.com</div>
+      </a>
+      <a class="res-card" data-cat="video" href="https://www.udacity.com/course/data-analyst-nanodegree--nd002" target="_blank" rel="noopener">
+        <div class="res-type">Video Course</div>
+        <h4>Udacity Nanodegree</h4>
+        <p>Program intensif dengan mentor, proyek nyata, dan review code. Investasi serius.</p>
+        <div class="res-platform">udacity.com</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Proyek Portofolio</span>
+      <h2 class="section-title">Bangun Portofolio yang Memukau</h2>
+      <p class="section-sub">
+        Teori saja tidak cukup. Recruiter ingin melihat bukti. Kerjakan minimal 3 proyek
+        berikut untuk menunjukkan kemampuan end-to-end, dari pengumpulan data sampai insight.
+      </p>
+    </div>
+
+    <div class="projects">
+      <div class="proj-card reveal">
+        <span class="proj-num">P01</span>
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg></div>
+        <h4>Analisis Penjualan Retail</h4>
+        <p>Gunakan dataset Superstore. Buat dashboard penjualan per kategori, region, dan waktu. Identifikasi 3 insight bisnis.</p>
+        <div class="proj-skills">
+          <span>Excel</span><span>SQL</span><span>Power BI</span>
+        </div>
+      </div>
+      <div class="proj-card reveal">
+        <span class="proj-num">P02</span>
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h4>Segmentasi Pelanggan</h4>
+        <p>Pakai K-Means clustering untuk membagi pelanggan berdasarkan perilaku belanja. Berikan rekomendasi strategi marketing.</p>
+        <div class="proj-skills">
+          <span>Python</span><span>Pandas</span><span>Scikit-learn</span>
+        </div>
+      </div>
+      <div class="proj-card reveal">
+        <span class="proj-num">P03</span>
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <h4>A/B Test E-commerce</h4>
+        <p>Analisis hasil A/B testing landing page. Tentukan variant mana yang signifikan lebih baik dan rekomendasikan keputusan.</p>
+        <div class="proj-skills">
+          <span>Statistik</span><span>Python</span><span>Viz</span>
+        </div>
+      </div>
+      <div class="proj-card reveal">
+        <span class="proj-num">P04</span>
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <h4>Prediksi Churn Pelanggan</h4>
+        <p>Bangun model klasifikasi untuk prediksi pelanggan yang akan churn. Berikan rekomendasi retensi berdasarkan fitur penting.</p>
+        <div class="proj-skills">
+          <span>Python</span><span>ML</span><span>Scikit-learn</span>
+        </div>
+      </div>
+      <div class="proj-card reveal">
+        <span class="proj-num">P05</span>
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <h4>Analisis Data Twitter/X</h4>
+        <p>Scrape atau gunakan API untuk mengumpulkan tweet. Analisis sentimen publik terhadap topik trending tertentu.</p>
+        <div class="proj-skills">
+          <span>Python</span><span>API</span><span>NLP</span>
+        </div>
+      </div>
+      <div class="proj-card reveal">
+        <span class="proj-num">P06</span>
+        <div class="proj-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <h4>Dashboard Open Data Indonesia</h4>
+        <p>Pakai data BPS / data.go.id. Buat dashboard interaktif tentang demografi, ekonomi, atau kesehatan masyarakat.</p>
+        <div class="proj-skills">
+          <span>Tableau</span><span>Open Data</span><span>Storytelling</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIPS ============ -->
+<section id="tips">
+  <div class="container">
+    <div class="tips reveal">
+      <div style="text-align:center; max-width:720px; margin:0 auto;">
+        <span class="eyebrow">Tips Sukses Belajar</span>
+        <h2 class="section-title">Strategi Belajar yang Terbukti Efektif</h2>
+        <p class="section-sub" style="margin:0 auto;">
+          Konsistensi mengalahkan intensitas. Empat tips ini memaksimalkan hasil belajarmu
+          selama 6 bulan.
+        </p>
+      </div>
+      <div class="tips-grid">
+        <div class="tip">
+          <div class="tip-num">1</div>
+          <div>
+            <h4>Belajar 1 Jam Setiap Hari</h4>
+            <p>Konsistensi harian lebih efektif daripada belajar 7 jam sekali seminggu. Buat jadwal tetap di kalender belajar.</p>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-num">2</div>
+          <div>
+            <h4>Praktik &gt; Teori</h4>
+            <p>Setiap konsep harus langsung dipraktikkan dengan dataset nyata. Belajar teori 30%, praktik 70%.</p>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-num">3</div>
+          <div>
+            <h4>Dokumentasikan Semua</h4>
+            <p>Catat di GitHub, blog, atau Notion. Catatan ini jadi portofolio dan referensi ulang ketika interview.</p>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="tip-num">4</div>
+          <div>
+            <h4>Gabung Komunitas</h4>
+            <p>Indonesia Data Community, Kaggle Discord, atau grup kampus. Belajar bersama = lebih cepat & terhindar dari salah arah.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section id="start">
+  <div class="container">
+    <div class="cta-banner reveal">
+      <span class="eyebrow" style="margin-bottom:18px;">Saatnya Mulai</span>
+      <h2>Perjalananmu Dimulai Hari Ini</h2>
+      <p>
+        Tidak ada kata terlambat. Mulai dari Tahap 1, alokasikan 1 jam per hari, dan dalam 6 bulan
+        kamu akan punya portofolio yang siap dilamar ke perusahaan. Commit sekarang.
+      </p>
+      <div class="hero-cta" style="justify-content:center;">
+        <a href="#roadmap" class="btn btn-primary">
+          Mulai dari Tahap 1
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#resources" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Lihat Sumber Belajar
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-6"/>
+          </svg>
+        </div>
+        <div>
+          DataPath<span style="opacity:.5;">.</span>ID
+          <small>Roadmap Belajar Data Analyst untuk Mahasiswa Indonesia</small>
+        </div>
+      </div>
+      <div>
+        <p>Dibuat untuk para pembelajar data Indonesia · 2026</p>
+      </div>
+      <div class="footer-links">
+        <a href="#why">Mengapa</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#resources">Sumber</a>
+        <a href="#top">Kembali ke atas</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ============ NAVBAR SCROLL ============
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ============ MOBILE MENU ============
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => navLinks.classList.remove('open'))
+  );
+
+  // ============ SCROLL REVEAL ============
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ============ RESOURCES TABS ============
+  const tabs = document.querySelectorAll('.res-tab');
+  const cards = document.querySelectorAll('.res-card');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const cat = tab.dataset.cat;
+      cards.forEach(c => {
+        const show = cat === 'all' || c.dataset.cat === cat;
+        c.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
+  // ============ SMOOTH SCROLL OFFSET ============
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
+        const el = document.querySelector(id);
+        if (el) {
+          e.preventDefault();
+          const top = el.getBoundingClientRect().top + window.scrollY - 70;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>
